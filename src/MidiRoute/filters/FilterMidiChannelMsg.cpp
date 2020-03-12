@@ -35,7 +35,7 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
         if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal(old_data2);}
 
         // destination within boundaries
-        passedFromFilter = passedFromFilter && new_data2 > 0 && new_data1 > 0 && new_channel > 0 && new_command > 0 &&
+        passedFromFilter = passedFromFilter && new_data2 >= 0 && new_data1 >= 0 && new_channel >= 0 && new_command >= 0 &&
           new_data2 <= fromData2.H_BOUND && new_data1 <= fromData1.H_BOUND && new_channel <= fromChannel.H_BOUND && new_command <= fromCommand.H_BOUND;
 
         if (deleteIfNot == MIDI_FILTER_ACTION_IF_NOT::DELETE_IF_NOT  && !passedFromFilter){

@@ -97,6 +97,7 @@ p.sendPitchBend(-1,{1});
 
 * [Qt Create Open Source](https://www.qt.io/) - Used only as IDE.
 * [RtMidi](https://www.music.mcgill.ca/~gary/rtmidi/) - C++ access to MIDI
+* https://github.com/P1eaz/QWebchannelCppClient/blob/master/main.cpp 
 
 
 ## Authors

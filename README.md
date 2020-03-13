@@ -12,9 +12,13 @@ https://github.com/shemeshg/midi-router-client
 
 
 Compiled client and server for OSX:
+
 https://drive.google.com/file/d/11CmUCZI6s4dZSC6PSf5_3JkKPMArVYH8/view?usp=sharing
+
 Compiled client and server for Linux:
+
 `sudo apt-get install librtmidi-dev`
+
 https://drive.google.com/file/d/1Evk11elK0Bz3tUgQk6zapEgk_O9-AUyF/view?usp=sharing
 
 ## Getting Started

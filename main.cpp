@@ -45,12 +45,12 @@ int main(int argc, char* argv[])
 
     QCommandLineOption portOption(QStringList() << "p" << "port",
             QCoreApplication::translate("main", "Port for midi server [default: 12345]."),
-            QCoreApplication::translate("main", "port"), QLatin1Literal("12345"));
+            QCoreApplication::translate("main", "port"), QLatin1String("12345"));
     parser.addOption(portOption);
 
     QCommandLineOption virtualportOption(QStringList() << "v" << "virtualport",
             QCoreApplication::translate("main", "run virtual port (will not run server)"),
-            QCoreApplication::translate("main", "virtualport"), QLatin1Literal(""));
+            QCoreApplication::translate("main", "virtualport"), QLatin1String(""));
     parser.addOption(virtualportOption);
 
     parser.process(app);

@@ -103,18 +103,17 @@ public:
 
 private:
     std::vector<BYTE> qStringListToVectorByte(QStringList &channels){
-        std::vector<QString> qsChannels = channels.toVector().toStdVector();
         std::vector<BYTE>  stdchannels;
-        foreach( QString str, qsChannels) {
+        foreach( QString str, channels) {
             stdchannels.push_back(str.toInt());
         }
         return stdchannels;
     }
 
     std::vector<std::string> qStringListToVectorString(QStringList &notes){
-        std::vector<QString> qsNotes = notes.toVector().toStdVector();
+
         std::vector<std::string>  stdNotes;
-        foreach( QString str, qsNotes) {
+        foreach( QString str, notes) {
             stdNotes.push_back(str.toStdString());
         }
         return stdNotes;

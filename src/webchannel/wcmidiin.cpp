@@ -69,6 +69,8 @@ void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto){
         qvm["portNumber"] = m.portNumber;
         qvm["deltatime"] = m.deltatime;
         qvm["channel"] = m.channel;
+        qvm["msgtype"] = m.msgtype;
+        qvm["command"] = m.command;
         qvm["commandStr"] = QString::fromStdString(m.commandStr);
         qvm["data1"] = m.data1;
         qvm["data2"] = m.data2;

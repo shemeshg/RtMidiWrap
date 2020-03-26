@@ -61,7 +61,7 @@ void WcMidiIn::openVirtualPort(const QString &s){
     return midiin->openVirtualPort(s.toStdString());
 }
 
-void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto){
+void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto, std::string userdata){
     if (logto == LOG_TO::CLIENT){
         QJsonObject qvm;
         qvm["portName"] = QString::fromStdString(m.portName);
@@ -74,7 +74,7 @@ void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto){
         qvm["commandStr"] = QString::fromStdString(m.commandStr);
         qvm["data1"] = m.data1;
         qvm["data2"] = m.data2;
-
+        qvm["userdata"] = QString::fromStdString(userdata);
 
         QJsonArray dataArray;
         foreach (const int data, m.data) {

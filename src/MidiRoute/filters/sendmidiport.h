@@ -14,25 +14,25 @@ class SendMidiPort:public RoutFilter{
 
 public:
 
-    std::unique_ptr<SignalSlotClass> giliSlotClass;
-    std::unique_ptr<SignalClass> giliSignalClass;
+    std::unique_ptr<SignalSlotClass> slotClass;
+    std::unique_ptr<SignalClass> signalClass;
 
     ~SendMidiPort() { };
     SendMidiPort(std::string portName){
-        giliSlotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
-        giliSlotClass->openPort(portName);
-        giliSignalClass =  std::unique_ptr< SignalClass>( new SignalClass( *giliSlotClass.get() ) );
+        slotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
+        slotClass->openPort(portName);
+        signalClass =  std::unique_ptr< SignalClass>( new SignalClass( *slotClass.get() ) );
     };
 
     SendMidiPort(int portNumber){
-        giliSlotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
-        giliSlotClass->openPort(portNumber);
-        giliSignalClass =  std::unique_ptr< SignalClass>( new SignalClass( *giliSlotClass.get() ) );
+        slotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
+        slotClass->openPort(portNumber);
+        signalClass =  std::unique_ptr< SignalClass>( new SignalClass( *slotClass.get() ) );
 
     };
 
     void doFilter(RtMidiWrap::MidiEvent &in) override{
-         giliSignalClass->doSendMessage(in.data);
+         signalClass->doSendMessage(in.data);
     };
 
 

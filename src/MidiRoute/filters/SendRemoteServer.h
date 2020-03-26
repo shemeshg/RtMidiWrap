@@ -15,21 +15,19 @@ public:
     Webchannel::EmitCommand &ec;
 
 
-    std::unique_ptr<SignalSlotClass> giliSlotClass;
-    std::unique_ptr<SignalClass> giliSignalClass;
+    std::unique_ptr<SignalSlotClass> slotClass;
+    std::unique_ptr<SignalClass> signalClass;
 
     SendRemoteServer(Webchannel::EmitCommand &ec,std::string serverName, int serverPort, int remoteMidiPortNumber):
         serverName{serverName},serverPort{serverPort},remoteMidiPortNumber{remoteMidiPortNumber},ec{ec}  {
 
-        giliSlotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
-        giliSlotClass->openConnection(QString::fromStdString(serverName),serverPort, remoteMidiPortNumber);
-        giliSignalClass =  std::unique_ptr< SignalClass>( new SignalClass( *giliSlotClass.get() ) );
+        slotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
+        slotClass->openConnection(QString::fromStdString(serverName),serverPort, remoteMidiPortNumber);
+        signalClass =  std::unique_ptr< SignalClass>( new SignalClass( *slotClass.get() ) );
     };
 
     void doFilter(RtMidiWrap::MidiEvent &in) override{
-        //giliSignalClass->doTest("Still ok\n");
-        giliSignalClass->sendRemoteServer(in,serverName, serverPort, remoteMidiPortNumber);
-        //ec.sendRemoteServer(in,serverName, serverPort, remoteMidiPortNumber);
+        signalClass->sendRemoteServer(in,serverName, serverPort, remoteMidiPortNumber);
     };
 
 

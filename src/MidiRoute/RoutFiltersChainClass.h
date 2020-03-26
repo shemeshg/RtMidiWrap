@@ -30,8 +30,8 @@ public:
          filterMidiChannelMsgAry.push_back(std::make_unique<SendRemoteServer>(ec, serverName, serverPort, remoteMidiPortNumber));
     }
 
-    void addLogData(Webchannel::EmitCommand &ec, Webchannel::LOG_TO logto){
-            filterMidiChannelMsgAry.push_back(std::make_unique<LogData>(ec, logto));
+    void addLogData(Webchannel::EmitCommand &ec, Webchannel::LOG_TO logto, string userdata){
+            filterMidiChannelMsgAry.push_back(std::make_unique<LogData>(ec, logto, userdata));
     }
 
     void addDeferedEvent(RtMidiWrap::DEFFERED_EVENT_TYPE defferedEventType, double defferedTo){

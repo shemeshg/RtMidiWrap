@@ -49,7 +49,7 @@ protected:
 public:
     explicit WcMidiIn(QObject *parent = nullptr);
 
-    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto);
+    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto, std::string userdata);
 
     void propegateClock(int portNumber, double barPosition, double spp, double barPositionNoReset, double sppNoReset){
 
@@ -124,8 +124,8 @@ public:
         return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
 
-    Q_INVOKABLE int routingActionAddLogData(int portNumber, int chainId, int logto){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addLogData(*this,(LOG_TO)logto);
+    Q_INVOKABLE int routingActionAddLogData(int portNumber, int chainId, int logto, QString userdata){
+        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addLogData(*this,(LOG_TO)logto, userdata.toStdString());
         return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
     Q_INVOKABLE int routingActionAddDeferedEvent(int portNumber, int chainId, int defferedEventType,double defferedTo){
@@ -151,10 +151,6 @@ public:
 
         return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
 
-    }
-public slots:
-    void gili(){
-        std::cout<< "Yes SLOT DID MIDIID "<<"\n";
     }
 
 signals:

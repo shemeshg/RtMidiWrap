@@ -57,9 +57,7 @@ public:
 
     }
 public slots:
-    void gili(QString in){
-        qDebug()<< "Yes SLOT DID Test "<< in<<"\n";
-    }
+
     void invokeMethod(QString connectionString , int remoteMidiPortNumber, QString obj, QString method, QJsonArray args){
 
         if (connectionString != this->connectionString || remoteMidiPortNumber != this->remoteMidiPortNumber){

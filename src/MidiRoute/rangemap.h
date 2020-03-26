@@ -2,6 +2,7 @@
 #define RANGEMAP_H
 #include <vector>
 #include <map>
+#include <math.h>
 
 namespace MidiRoute {
 class RangeMap{
@@ -56,8 +57,9 @@ public:
 
    void mapFromToRange(float fromLBount, float fromHBound, float toLBound, float toHBound){
        for(float i=fromLBount;i<=fromHBound;i++){
-           int dest = (( i -fromLBount)/(fromHBound-fromLBount)  )*(toHBound-toLBound)+toLBound;
-           rangeMap[i] = dest;
+
+           float dest =  (( i -fromLBount)/(fromHBound-fromLBount)  )*(toHBound-toLBound)+toLBound;
+           rangeMap[i] = round(dest);
        }
    }
 };

@@ -83,7 +83,6 @@ public:
             : QObject(Parent)
         {
 
-            connect(this, SIGNAL(test(QString)), &s, SLOT(test(QString)));
             connect(this, SIGNAL(invokeMethod(
                 QString  , int , QString , QString , QJsonArray
                  )), &s, SLOT(invokeMethod(

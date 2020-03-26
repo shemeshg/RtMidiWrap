@@ -80,11 +80,11 @@ unix:!macx: DEPENDPATH += /usr/include/rtmidi
 
 
 # **** static link
-macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi
-macx: PRE_TARGETDEPS += /usr/local/Cellar/rtmidi/4.0.0/lib/librtmidi.a
+# macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi
+# macx: PRE_TARGETDEPS += /usr/local/Cellar/rtmidi/4.0.0/lib/librtmidi.a
 
 # **** dynamic link
-# macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi.5
+macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi.5
 
 
 # **** dynamic and static link

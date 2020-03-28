@@ -10,7 +10,11 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
                           ){
     bool passedFromFilter = true;
     if (in.msgtype == RtMidiWrap::MIDI_MSG_TYPE::MIDI_CHANNEL_MESSAGES ){
-        std::vector<BYTE> sndVector = {0,0,0};
+        std::vector<BYTE> sndVector;
+        for (unsigned i=0; i<in.data.size(); i++)
+                sndVector.push_back(in.data[i]);
+
+
         int old_command = in.data[0] >> 4;
         int new_command = old_command;
         passedFromFilter = passedFromFilter && fromCommand.isInRange( old_command);
@@ -27,12 +31,15 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
         passedFromFilter = passedFromFilter && fromData1.isInRange(old_data1);
         if (fromData1.isInRange(old_data1)){new_data1 = fromData1.getVal(old_data1);}
 
+        int old_data2 = 0;
+        int new_data2 = 0;
+        if (2 <= in.data.size()){
+            old_data2 = in.data[2];
+            new_data2 = old_data2;
+            passedFromFilter = passedFromFilter && fromData2.isInRange(old_data2);
+            if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal(old_data2);}
+        }
 
-        int old_data2 = in.data[2];
-        int new_data2 = old_data2;
-
-        passedFromFilter = passedFromFilter && fromData2.isInRange(old_data2);
-        if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal(old_data2);}
 
         // destination within boundaries
         passedFromFilter = passedFromFilter && new_data2 >= 0 && new_data1 >= 0 && new_channel >= 0 && new_command >= 0 &&
@@ -49,12 +56,16 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
                 sndVector[0] = (new_command<<4) + (new_channel -1) ;
 
                 sndVector[1] = new_data1;
-                sndVector[2] = new_data2;
+                if (2 <= sndVector.size()){
+                    sndVector[2] = new_data2;
+                }
 
                 if(new_command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::channelaftertouch){
-                    sndVector[1] = sndVector[2];
-                    // There should not be sndVector[2] in channelaftertouch
-                    sndVector.pop_back();
+                    if (2 == sndVector.size()){
+                        sndVector[1] = sndVector[2];
+                        // There should not be sndVector[2] in channelaftertouch
+                        sndVector.pop_back();
+                    }
                 }
 
                 if(new_command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::pitchbend ){

@@ -13,6 +13,7 @@
 #include "src/MidiRoute/rangemap.h"
 #include "src/webchannel/wcmidiinlistener.h"
 #include "libs/QWebchannelCppClient/WebChannelClient.h"
+#include "virtualinout.h"
 
 namespace Webchannel {
 
@@ -67,6 +68,9 @@ public:
 
     Q_INVOKABLE void openPort( int portNumber) ;
     Q_INVOKABLE void openVirtualPort(const QString &s);
+    Q_INVOKABLE void openVirtualInOutPort(const QString &s){
+        addVirtualInOutPort(s.toStdString());
+    }
 
     // these functions assume openedMidiOutObj[portNumber] exists
     Q_INVOKABLE bool isPortOpen( int portNumber);

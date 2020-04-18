@@ -10,30 +10,12 @@
 #include "src/webchannel/wcmidiout.h"
 #include "src/webchannel/wcmidiin.h"
 #include "src/webchannel/wcuserdata.h"
-
+#include "src/webchannel/virtualinout.h"
 
 
 using namespace Webchannel;
 
-RtMidiOut *midiout;
-void mycallback( double deltatime, std::vector< unsigned char > *message, void *userData )
-{
-    UNUSED(deltatime);
-    UNUSED(userData);
-  midiout->sendMessage(message);
-}
 
-
-void openVirtualPort(string portname){
-    RtMidiIn *midiin = new RtMidiIn();
-    midiin->openVirtualPort(portname);
-    midiout = new RtMidiOut();
-    midiout->openVirtualPort(portname);
-    midiin->setCallback( &mycallback );
-
-    char input;
-    std::cin.get(input);
-}
 
 int main(int argc, char* argv[])
 {
@@ -57,7 +39,9 @@ int main(int argc, char* argv[])
 
     string virtualPortname = parser.value(virtualportOption).toStdString();
     if (! virtualPortname.empty()){
-        openVirtualPort(virtualPortname);
+        addVirtualInOutPort(virtualPortname);
+        char input;
+        std::cin.get(input);
         return 0;
     }
 

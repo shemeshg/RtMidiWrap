@@ -31,6 +31,7 @@ SOURCES += \
         src/RtMidiWrap/playmidiin.cpp \
         src/RtMidiWrap/playmidiout.cpp \
         src/RtMidiWrap/songposition.cpp \
+        src/webchannel/virtualinout.cpp \
         src/webchannel/wcmidiin.cpp \
         src/webchannel/wcmidiout.cpp \
         src/webchannel/wcuserdata.cpp
@@ -60,6 +61,7 @@ HEADERS += \
     src/webchannel/EmitCommand.h \
     src/webchannel/SignalSlot.h \
     src/webchannel/WcRouteFilterChains.h \
+    src/webchannel/virtualinout.h \
     src/webchannel/wcmidiin.h \
     src/webchannel/wcmidiinlistener.h \
     src/webchannel/wcmidiout.h \

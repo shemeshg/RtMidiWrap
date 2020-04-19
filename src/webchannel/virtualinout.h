@@ -10,8 +10,8 @@ void virtualInOutPortCallback( double deltatime, std::vector< unsigned char > *m
 
 class VirtualInOut {
 public:
-    RtMidiIn *midiinVirtual = new RtMidiIn();
-    RtMidiOut *midioutVirtual = new RtMidiOut();
+    std::unique_ptr<RtMidiIn> midiinVirtual = std::unique_ptr<RtMidiIn>( new RtMidiIn() );
+    std::unique_ptr<RtMidiOut> midioutVirtual = std::unique_ptr<RtMidiOut>( new RtMidiOut() );
     void addVirtualInOutPort(std::string portname);
 };
 

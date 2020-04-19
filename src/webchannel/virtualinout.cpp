@@ -15,7 +15,6 @@ void VirtualInOut::addVirtualInOutPort(std::string portname){
 
     midiinVirtual->openVirtualPort(portname);
 
-
     midioutVirtual->openVirtualPort(portname);
     midiinVirtual->setCallback( &virtualInOutPortCallback, (void *)this );
 

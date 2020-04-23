@@ -10,12 +10,9 @@
 The frontend is Vue js can be clonedd here:
 https://github.com/shemeshg/midi-router-client
 
+[Compiled server and client for OSX or linux:](https://sourceforge.net/projects/midi-router-client/)
 
-Compiled client and server for OSX:
-
-https://drive.google.com/file/d/11CmUCZI6s4dZSC6PSf5_3JkKPMArVYH8/view?usp=sharing
-
-Compiled client and server for Linux:
+For linux
 
 `sudo apt-get install librtmidi-dev`
 

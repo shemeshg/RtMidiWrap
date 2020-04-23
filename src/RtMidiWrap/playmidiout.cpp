@@ -77,11 +77,11 @@ void PlayMidiOut::_setCurrentRegisteredParameter( std::vector<BYTE> data, std::v
         sendControlChange(0x06, data[0], {channel});
     }
 
-    if(data[1] >= 0 && data[1] <= 127) {
+    //if(data[1] >= 0 && data[1] <= 127) { //this is always true because of data type
         for (auto &channel : channels){
             sendControlChange(0x26, data[1], {channel});
         }
-    }
+    //}
 }
 
 void PlayMidiOut::setModulationRange(BYTE semitones,BYTE cents,std::vector<BYTE> channels){

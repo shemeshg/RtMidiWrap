@@ -4,7 +4,7 @@
 
 #include "src/RtMidiWrap/RtMidiWrap.h"
 #include <string>
-
+#include <memory>
 
 void virtualInOutPortCallback( double deltatime, std::vector< unsigned char > *message, void *userData );
 

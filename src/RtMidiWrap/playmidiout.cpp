@@ -168,7 +168,7 @@ void PlayMidiOut::setMasterTuning(float value, std::vector<BYTE> channels ){
     float fine = value - floor(value);
 
     // Calculate MSB and LSB for fine adjustment (14bit resolution)
-    int finei = ceill((fine + 1) / 2 * 16383);
+    int finei = (int)ceill((fine + 1) / 2 * 16383);
     int msb = (finei >> 7) & 0x7F;
     int lsb = finei & 0x7F;
 
@@ -177,7 +177,7 @@ void PlayMidiOut::setMasterTuning(float value, std::vector<BYTE> channels ){
     sendMessage(&sndVector);
 
     for (auto &channel : channels){
-        sndVector[0] = coarse;
+        sndVector[0] = (BYTE)coarse;
         sndVector[1] = 0;
         setRegisteredParameter(MIDI_REGISTERED_PARAMETER::channelcoarsetuning, sndVector, {channel});
         sndVector[0] = msb;
@@ -338,7 +338,7 @@ void PlayMidiOut::setTuningProgram(BYTE value, std::vector<BYTE> channels){
 
 void PlayMidiOut::sendPitchBend(float bend,  std::vector<BYTE> channels){
     if (bend < -1 || bend > 1){throw std::runtime_error("Pitch bend value must be between -1 and 1.");}
-    int nLevel = ceill((bend + 1) / 2 * 16383);
+    int nLevel = (int)ceill(( bend + 1) / 2 * 16383);
     int msb = (nLevel >> 7) & 0x7F;
     int lsb = nLevel & 0x7F;
     sendPitchBendLsbMsb(lsb,msb,channels);

@@ -3,6 +3,7 @@
 
 #include "RtMidiWrap.h"
 #include <algorithm>
+#include <cctype>
 
 
 namespace RtMidiWrap {

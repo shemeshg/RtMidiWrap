@@ -15,6 +15,9 @@ macx: DEFINES += __MACOSX_CORE__
 unix:!macx: LIBS += -lasound -lpthread
 unix:!macx: DEFINES += __LINUX_ALSA__
 
+win32: LIBS += -lwinmm
+win32: DEFINES += __WINDOWS_MM__
+
 SOURCES += \
         libs/QWebchannelCppClient/WebChannelClient.cpp \
         libs/rtmidi/RtMidi.cpp \

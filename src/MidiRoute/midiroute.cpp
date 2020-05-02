@@ -99,7 +99,7 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
                     copyOfM.defferedSubmittedAt = songposition.getBarPositionNoReset();
                 }
                 RtMidiWrap::MidiEvent defferedCopyOfM = copyOfM;
-                defferedMidiEvents.push_back(std::make_unique<RtMidiWrap::MidiEvent>(defferedCopyOfM));
+                defferedMidiEvents.push_back(std::unique_ptr<RtMidiWrap::MidiEvent>(new RtMidiWrap::MidiEvent (defferedCopyOfM)));
                 copyOfM.eventStatus = RtMidiWrap::EVENT_STATUS::DELETED;
             }
         }

@@ -17,6 +17,7 @@ unix:!macx: DEFINES += __LINUX_ALSA__
 
 SOURCES += \
         libs/QWebchannelCppClient/WebChannelClient.cpp \
+        libs/rtmidi/RtMidi.cpp \
         libs/websocket/websocketclientwrapper.cpp \
         libs/websocket/websockettransport.cpp \
         main.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 
 HEADERS += \
     libs/QWebchannelCppClient/WebChannelClient.h \
+    libs/rtmidi/RtMidi.h \
     libs/websocket/websocketclientwrapper.h \
     libs/websocket/websockettransport.h \
     src/MidiRoute/RoutFiltersChainClass.h \
@@ -46,7 +48,6 @@ HEADERS += \
     src/MidiRoute/filters/defferedevent.h \
     src/MidiRoute/filters/logdata.h \
     src/MidiRoute/filters/sendmidiport.h \
-    src/MidiRoute/make_unique.h \
     src/MidiRoute/midifilterchain.h \
     src/MidiRoute/midiroute.h \
     src/MidiRoute/rangemap.h \
@@ -75,21 +76,5 @@ HEADERS += \
 
 
 
-unix:!macx: LIBS += -L/usr/lib/x86_64-linux-gnu/ -lrtmidi
-unix:!macx: INCLUDEPATH += /usr/include/rtmidi
-unix:!macx: DEPENDPATH += /usr/include/rtmidi
 
-
-
-# **** static link
-# macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi
-# macx: PRE_TARGETDEPS += /usr/local/Cellar/rtmidi/4.0.0/lib/librtmidi.a
-
-# **** dynamic link
-macx: LIBS += -L/usr/local/Cellar/rtmidi/4.0.0/lib/ -lrtmidi.5
-
-
-# **** dynamic and static link
-macx: INCLUDEPATH += /usr/local/Cellar/rtmidi/4.0.0/include
-macx: DEPENDPATH += /usr/local/Cellar/rtmidi/4.0.0/include
 

@@ -3,7 +3,7 @@
 //#include <string>
 //#include <map>
 #include "common.h"
-#include "RtMidi.h"
+#include "libs/rtmidi/RtMidi.h"
 
 // Platform-dependent sleep routines.
 #if defined(WIN32)

@@ -6,6 +6,7 @@
 #include <QWebSocketServer>
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QCommandLineOption>
+#include <QSettings>
 
 #include "src/webchannel/wcmidiout.h"
 #include "src/webchannel/wcmidiin.h"
@@ -20,6 +21,9 @@ using namespace Webchannel;
 int main(int argc, char* argv[])
 {
     QCoreApplication app(argc, argv);
+    QSettings settings("shemeshg", "MidiRouter");
+    int port = settings.value("server/port", 12345).toInt();
+    cout<<"Server port is "<<port<< "\n";
 
     QCommandLineParser parser;
     parser.setApplicationDescription("QtWebSockets server");
@@ -27,7 +31,7 @@ int main(int argc, char* argv[])
 
     QCommandLineOption portOption(QStringList() << "p" << "port",
             QCoreApplication::translate("main", "Port for midi server [default: 12345]."),
-            QCoreApplication::translate("main", "port"), QLatin1String("12345"));
+            QCoreApplication::translate("main", "port"), QLatin1String(""));
     parser.addOption(portOption);
 
     QCommandLineOption virtualportOption(QStringList() << "v" << "virtualport",
@@ -45,7 +49,13 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    int port = parser.value(portOption).toInt();
+    if (!parser.value(portOption).toStdString().empty()){
+        int serverPortToSet = parser.value(portOption).toInt();
+        settings.setValue("server/port", serverPortToSet);
+        cout<<"Server port is set to " << serverPortToSet<< " in configuration file, start server again\n";
+        return 0;
+    }
+
 
 
 

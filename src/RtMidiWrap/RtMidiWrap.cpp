@@ -82,7 +82,8 @@ std::vector<std::string> getCompiledApi(){
     }
 
     std::string IMidiInOut::getPortName(unsigned int portNumber){
-        return p_midi->getPortName(portNumber);
+
+        return std::to_string(unqIdPortNumber(portNumber)) + "_" + p_midi->getPortName(portNumber);
     }
 
     unsigned int IMidiInOut::getPortNumber(const std::string &portName){
@@ -104,6 +105,17 @@ std::vector<std::string> getCompiledApi(){
 
     void IMidiInOut::setErrorCallback(RtMidiErrorCallback errorCallback, void * 	userData ){
         p_midi->setErrorCallback(errorCallback,userData);
+    }
+
+    unsigned int IMidiInOut::unqIdPortNumber(unsigned int portNumber)
+    {
+        //unsigned int nPorts = this->getPortCount();
+        unsigned unqId = 0;
+        std::string portnameWithoutUnqIdx = p_midi->getPortName(portNumber);
+        for ( unsigned i=0; i<portNumber; i++ ) {
+          if ( p_midi->getPortName(i) == portnameWithoutUnqIdx){unqId ++;}
+        }
+        return unqId;
     }
 
     void IMidiInOut::openPort( unsigned int portNumber, const std::string &setPortName) {

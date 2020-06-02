@@ -33,8 +33,7 @@ std::vector<std::string> getCompiledApi();
 
 
 class IMidiInOut{
-protected:
-    RtMidi  *p_midi=0;
+
 public:
     unsigned int getPortCount();
     std::string getPortName(unsigned int portNumber);
@@ -46,7 +45,10 @@ public:
     void setErrorCallback	(RtMidiErrorCallback errorCallback = NULL, void * 	userData = 0 );
     int openedPortNumber = -1;
     std::string openedPortName = "";
-
+protected:
+    RtMidi  *p_midi=0;
+private:
+    unsigned int unqIdPortNumber(unsigned int portNumber);
 };
 
 class MidiIn:public IMidiInOut{

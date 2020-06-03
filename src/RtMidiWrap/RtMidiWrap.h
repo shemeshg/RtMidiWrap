@@ -37,9 +37,9 @@ class IMidiInOut{
 public:
     unsigned int getPortCount();
     std::string getPortName(unsigned int portNumber);
-    unsigned int getPortNumber(const std::string &portName);
+    int getPortNumber(const std::string &portName);
     void openPort( unsigned int portNumber = 0, const std::string &setPortName = std::string( "RtMidi" ) ) ;
-    void openPort( const std::string &PortName, const std::string &setPortName = std::string( "RtMidi" ) ) ;
+    int openPort( const std::string &PortName, const std::string &setPortName = std::string( "RtMidi" ) ) ;
     bool isPortOpen	(void);
     void openVirtualPort	(const std::string & portName = std::string( "RtMidi Output" )	);
     void setErrorCallback	(RtMidiErrorCallback errorCallback = NULL, void * 	userData = 0 );

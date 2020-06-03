@@ -13,7 +13,7 @@ std::string PlayMidi::getPortName(unsigned int portNumber){
     return  midiinout->getPortName(portNumber);
 }
 
-unsigned int PlayMidi::getPortNumber(const std::string &portName){
+int PlayMidi::getPortNumber(const std::string &portName){
     return  midiinout->getPortNumber(portName);
 }
 

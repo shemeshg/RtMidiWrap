@@ -86,13 +86,13 @@ std::vector<std::string> getCompiledApi(){
         return std::to_string(unqIdPortNumber(portNumber)) + "_" + p_midi->getPortName(portNumber);
     }
 
-    unsigned int IMidiInOut::getPortNumber(const std::string &portName){
+    int IMidiInOut::getPortNumber(const std::string &portName){
         unsigned int nPorts = this->getPortCount();
 
         for ( unsigned i=0; i<nPorts; i++ ) {
           if ( this->getPortName(i) == portName){return i;}
         }
-        throw std::runtime_error("IMidiInOut::getPortNumber");
+        return -1;
     }
 
     bool IMidiInOut::isPortOpen(){

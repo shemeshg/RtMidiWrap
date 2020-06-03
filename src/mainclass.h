@@ -1,6 +1,6 @@
 #ifndef MAINCLASS_H
 #define MAINCLASS_H
-#include <QCoreApplication>
+#include <QApplication>
 
 class MainClass
 {
@@ -9,8 +9,9 @@ public:
     int connectAndExec();
 private:
     int port = 12345;
-    QCoreApplication app;
+    QApplication app;
     void parseParams();
+
 };
 
 #endif // MAINCLASS_H

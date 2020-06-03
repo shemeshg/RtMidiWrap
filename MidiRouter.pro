@@ -4,7 +4,8 @@ CONFIG += console c++11
 # no need qt ui # CONFIG -= qt
 
 # add websockets
-QT       += core websockets webchannel
+QT       += core websockets webchannel \
+    widgets
 QT       -= gui
 CONFIG   += console
 
@@ -36,6 +37,7 @@ SOURCES += \
         src/RtMidiWrap/playmidiout.cpp \
         src/RtMidiWrap/songposition.cpp \
         src/mainclass.cpp \
+        src/uimain.cpp \
         src/webchannel/virtualinout.cpp \
         src/webchannel/wcmidiin.cpp \
         src/webchannel/wcmidiout.cpp \
@@ -64,6 +66,7 @@ HEADERS += \
     src/RtMidiWrap/playmidiout.h \
     src/RtMidiWrap/songposition.h \
     src/mainclass.h \
+    src/uimain.h \
     src/webchannel/EmitCommand.h \
     src/webchannel/SignalSlot.h \
     src/webchannel/WcRouteFilterChains.h \

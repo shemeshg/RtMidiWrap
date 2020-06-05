@@ -5,11 +5,11 @@
 class MainClass
 {
 public:    
-    MainClass(int argc, char* argv[]);
+    MainClass(QApplication &app);
     int connectAndExec();
 private:
     int port = 12345;
-    QApplication app;
+    QApplication &app;
     void parseParams();
 
 };

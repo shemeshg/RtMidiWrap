@@ -2,7 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-    MainClass mc(argc, argv);
+    QApplication app(argc, argv);
+    MainClass mc(app);
     return mc.connectAndExec();
 }
 

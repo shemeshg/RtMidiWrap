@@ -19,7 +19,7 @@
 
 using namespace Webchannel;
 
-MainClass::MainClass(int argc, char* argv[]):app{argc,argv}
+MainClass::MainClass(QApplication &app):app{app}
 {
     parseParams();
 }

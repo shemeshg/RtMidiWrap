@@ -5,6 +5,8 @@
 UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(parent)
 {
 
+    QLabel *labelVersion = new QLabel(tr("v0.15.0"));
+
     labelServerStatus = new QLabel(tr("Status: Running"));
     if (!isServerRunning){
         labelServerStatus->setText(tr("Status: Not running"));
@@ -26,7 +28,8 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
     QGridLayout *mainLayout = new QGridLayout;
     mainLayout->addWidget(labelServerStatus, 0, 0, 1, 2);
     mainLayout->addWidget(labelPortNumber, 1, 0, Qt::AlignTop);
-    mainLayout->addWidget(namePortNumber, 1, 1);
+    mainLayout->addWidget(namePortNumber, 1, 1);    
+    mainLayout->addWidget(labelVersion, 2, 0);
     mainLayout->addWidget(saveAndQuitButton, 2, 1);
     //! [layout]
 

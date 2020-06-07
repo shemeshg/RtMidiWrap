@@ -9,6 +9,9 @@ QT       += core websockets webchannel \
 QT       -= gui
 CONFIG   += console
 
+macx: ICON = icon.icns
+win32: RC_ICONS = icon.ico
+TARGET = "Midi router server"
 
 macx: LIBS += -framework CoreMIDI -framework CoreAudio -framework CoreFoundation
 macx: DEFINES += __MACOSX_CORE__

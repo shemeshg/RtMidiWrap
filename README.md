@@ -103,6 +103,7 @@ p.sendPitchBend(-1,{1});
 * [RtMidi](https://www.music.mcgill.ca/~gary/rtmidi/) - C++ access to MIDI
 * https://github.com/P1eaz/QWebchannelCppClient/blob/master/main.cpp 
 
+* Icon made by Pixel perfect from www.flaticon.com
 
 ## Authors
 

@@ -79,6 +79,9 @@ HEADERS += \
     src/webchannel/wcmidiout.h \
     src/webchannel/wcuserdata.h
 
+RESOURCES += \
+    rc.qrc
+
 
 
 

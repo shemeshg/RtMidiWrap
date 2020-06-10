@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += c++11
 # CONFIG -= app_bundle
 # no need qt ui # CONFIG -= qt
 
@@ -7,7 +7,7 @@ CONFIG += console c++11
 QT       += core websockets webchannel \
     widgets
 QT       -= gui
-CONFIG   += console
+# CONFIG   += console
 
 macx: ICON = icon.icns
 win32: RC_ICONS = icon.ico

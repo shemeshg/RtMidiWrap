@@ -11,12 +11,22 @@ void doRoute(std::string configFile);
 
 
 
-
+class NrpnContainer {
+public:
+    int nrpnCtrlMsb = -1;
+    int nrpnCtrlLsb = -1;
+    int nrpnDataMsb = -1;
+    int nrpnDataLsb = -1;
+};
 
 class MidiInRouter:public RtMidiWrap::PlayMidiIn{
 
     // protected temporary container for 14bit msb until lsb arrive
+    // <channel+cc,data2>
     std::map<int,int> msbForCc14Bit;
+    std::map<int,NrpnContainer> nrpnPack;
+
+
 public:
 
 

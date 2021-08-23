@@ -1,6 +1,7 @@
 TEMPLATE = app
-CONFIG += c++11
-# CONFIG -= app_bundle
+CONFIG += c++17
+CONFIG+=sdk_no_version_check
+CONFIG -= app_bundle
 # no need qt ui # CONFIG -= qt
 
 # add websockets
@@ -81,6 +82,8 @@ HEADERS += \
 
 RESOURCES += \
     rc.qrc
+
+ANDROID_ABIS = armeabi-v7a
 
 
 

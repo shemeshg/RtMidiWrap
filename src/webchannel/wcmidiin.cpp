@@ -75,6 +75,8 @@ void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto, std::string userd
         qvm["data1"] = m.data1;
         qvm["data2"] = m.data2;
         qvm["userdata"] = QString::fromStdString(userdata);
+        qvm["nrpnControl"] = m.nrpnControl;
+        qvm["nrpnData"] = m.nrpnData;
 
         QJsonArray dataArray;
         foreach (const int data, m.data) {

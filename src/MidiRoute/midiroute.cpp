@@ -45,6 +45,32 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
 
     }
 
+    // NRPN
+    if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
+            m.data1 == 99){
+        NrpnContainer nrpnC;
+        nrpnC.nrpnCtrlMsb = m.data2;
+        nrpnPack[m.channel] = std::move(nrpnC);
+    }
+    else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
+            m.data1 == 98){
+        nrpnPack[m.channel].nrpnCtrlLsb = m.data2;
+    }
+    else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
+            m.data1 == 6){
+        nrpnPack[m.channel].nrpnDataMsb = m.data2;
+    }
+    else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
+            m.data1 == 38){
+        nrpnPack[m.channel].nrpnDataLsb = m.data2;
+
+        m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * 128 + nrpnPack[m.channel].nrpnCtrlLsb;
+        m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * 128 + nrpnPack[m.channel].nrpnDataLsb;
+    } else {
+        m.nrpnControl = -1;
+        m.nrpnData = -1;
+    }
+
 
     // Force copy operation for vector
     std::vector< BYTE> mData;

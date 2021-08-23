@@ -47,6 +47,9 @@ public:
     double defferedTo = 0;
     int defferedFilterChainId = 0;
     int defferedFilterId = 0;
+
+    int nrpnControl = -1;
+    int nrpnData = -1;
 };
 }
 #endif // MIDIEVENT_H

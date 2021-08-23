@@ -40,23 +40,23 @@ void CWebChannelClient::initialize()
 
 				auto& webChannelObj = m_objects[objectName];
 
-				for (const auto& method : object["methods"].toArray())
+                for (const auto method : object["methods"].toArray())
 				{
-					const auto& descrip = method.toArray();
+                    const auto& descrip = method.toArray();
 
 					webChannelObj.Methods[descrip[0].toString()] = descrip[1].toInt();
 				}
 
-				for (const auto& signal : object["signals"].toArray())
+                for (const auto signal : object["signals"].toArray())
 				{
-					const auto& descrip = signal.toArray();
+                    const auto& descrip = signal.toArray();
 					const auto signalID = descrip[1].toInt();
 					const auto signalName = descrip[0].toString();
 					webChannelObj.Signals[signalName] = signalID;
 
 					webChannelObj.Connections[signalID] = QPointer<CWebChannelConnection>(new CWebChannelConnection());
 
-					//this->disconnect(objectName, signalName);
+                    //this->disconnect(objectName, signalName);
 
 				}
 			}

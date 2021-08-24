@@ -1,25 +1,14 @@
 #include "midiroute.h"
 #include <string>
 
-//#include "src/RtMidiWrap/RtMidiWrap.h"
-//#include "src/RtMidiWrap/playmidiout.h"
-//#include "src/RtMidiWrap/playmidiin.h"
-//#include "src/RtMidiWrap/midievent.h"
-//#include "src/RtMidiWrap/common.h"
-
-//#include "filters/FilterMidiChannelMsg.h"
-//#include "filters/sendmidiport.h"
-//#include "midifilterchain.h"
-//#include "rangemap.h"
-
 using namespace std;
 
 namespace MidiRoute {
 
 
 
-void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
-
+void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
+{
 
     for  (int &cc14item:cc14Bit)
     {
@@ -40,12 +29,11 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
             m.data[1] = m.data1;
             m.data[2] = m.data2;
         }
-
-
-
     }
+}
 
-    // NRPN
+void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
+{
     if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
             m.data1 == 99){
         NrpnContainer nrpnC;
@@ -70,8 +58,10 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
         m.nrpnControl = -1;
         m.nrpnData = -1;
     }
+}
 
-
+void MidiInRouter::proccessChainsAndFilters(RtMidiWrap::MidiEvent &m)
+{
     // Force copy operation for vector
     std::vector< BYTE> mData;
     for (unsigned i=0; i<m.data.size(); i++)
@@ -79,17 +69,12 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
 
     unsigned int nBytesChains = routeFilterChains->chains.size();
 
-
-
     for ( unsigned int i_chain=0; i_chain<nBytesChains; i_chain++ ){
         RtMidiWrap::MidiEvent copyOfM = m;
         unsigned int nBytesFilters = routeFilterChains->chains[i_chain]->filterMidiChannelMsgAry.size();
 
-
-
         std::vector< BYTE> copyOfData = mData;
         copyOfM.data  = copyOfData;
-
 
         for ( unsigned int i_filters=0; i_filters<nBytesFilters; i_filters++ ){
             if( copyOfM.eventStatus == RtMidiWrap::EVENT_STATUS::OK) {
@@ -130,6 +115,16 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
             }
         }
     }
+
+
+}
+
+void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
+    proccess14bitCc(m);
+    proccessNrpn(m);
+    proccessChainsAndFilters(m);
+
+
 
 
 }

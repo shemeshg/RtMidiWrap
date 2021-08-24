@@ -5,63 +5,89 @@
 #include <math.h>
 
 namespace MidiRoute {
+
+class RangeDefinition {
+public:
+    int fromLBound = 0;
+    int fromHBound = 0;
+    int toLBound = 0;
+    int toHBound = 0;
+};
+
 class RangeMap{
 public:
-    int H_BOUND=0;
-    std::map<int,int> rangeMap;
 
-
-    //default all
-   RangeMap(int hBound){
-    H_BOUND = hBound;
-    resetAll();
+    std::vector<RangeDefinition> rangeDefinitions;
+    bool defaultAllMaped = true;
+    //default all allowed 1==1 2==3 etc...
+   RangeMap(){
    }
 
-   void resetAll(){
-       for(int i=0;i<=H_BOUND;i++){
-           rangeMap[i] = i;
-       }
-   }
+
 
 
 
    void set(int i){
-       rangeMap[i] = i;
+       RangeDefinition r;
+       r.fromLBound = i;
+       r.fromHBound = i;
+       r.toLBound = 1;
+       r.toHBound = 1;
+       rangeDefinitions.push_back(std::move(r));
    }
 
    void set(int from, int to){
-           rangeMap[from] = to;
+       RangeDefinition r;
+       r.fromLBound = from;
+       r.fromHBound = from;
+       r.toLBound = to;
+       r.toHBound = to;
+       rangeDefinitions.push_back(std::move(r));
    }
 
   void set(int fromLBount, int fromHBound, int toLBound){
-      mapFromToRange(fromLBount, fromHBound, toLBound, toLBound + (fromHBound - fromLBount) );
+      RangeDefinition r;
+      r.fromLBound = fromLBount;
+      r.fromHBound = fromHBound;
+      r.toLBound = toLBound;
+      r.toHBound =  toLBound + (fromHBound - fromLBount);
+      rangeDefinitions.push_back(std::move(r));
   }
 
   void set(int fromLBount, int fromHBound, int toLBound, int toHBound){
-      mapFromToRange(fromLBount, fromHBound, toLBound, toHBound );
+      RangeDefinition r;
+      r.fromLBound = fromLBount;
+      r.fromHBound = fromHBound;
+      r.toLBound = toLBound;
+      r.toHBound =  toHBound;
+      rangeDefinitions.push_back(std::move(r));
   }
 
    void clear(){
-       for(int i=0;i<=H_BOUND;i++){
-           rangeMap[i] = -1;
-       }
+       rangeDefinitions.clear();
+       defaultAllMaped = false;
+
    }
 
    int getVal(int i){
-       return rangeMap[i];
+       int ret_val = -1;
+       if (defaultAllMaped) {ret_val = i;}
+
+
+       for (RangeDefinition &rd : rangeDefinitions) {
+           float dest  =  (( ret_val -rd.fromLBound)/(rd.fromHBound-rd.fromLBound)  )*(rd.toHBound-rd.toLBound)+rd.toLBound;
+           ret_val=dest;
+       }
+
+
+       return ret_val;
    }
 
    bool isInRange(int i){
-       return rangeMap[i] != -1;
+       return getVal(i) != -1;
    }
 
-   void mapFromToRange(float fromLBount, float fromHBound, float toLBound, float toHBound){
-       for(float i=fromLBount;i<=fromHBound;i++){
 
-           float dest =  (( i -fromLBount)/(fromHBound-fromLBount)  )*(toHBound-toLBound)+toLBound;
-           rangeMap[i] = round(dest);
-       }
-   }
 };
 
 RangeMap setRangeMapObject(std::vector<int> &jv, RangeMap &rm);

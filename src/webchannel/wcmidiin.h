@@ -141,13 +141,13 @@ public:
     Q_INVOKABLE int routingActionAddFilterMidiChannelMsg(int portNumber, int chainId,
                                                          QJsonArray channels, QJsonArray eventTypes, QJsonArray data1, QJsonArray data2, int midiFilterActionIfNot){
 
-        MidiRoute::RangeMap _channels(16);
+        MidiRoute::RangeMap _channels;
         _setRangeMap(_channels, channels);
-        MidiRoute::RangeMap _eventTypes(16);
+        MidiRoute::RangeMap _eventTypes;
         _setRangeMap(_eventTypes, eventTypes);
-        MidiRoute::RangeMap _data1(127);
+        MidiRoute::RangeMap _data1;
         _setRangeMap(_data1, data1);
-        MidiRoute::RangeMap _data2(127);
+        MidiRoute::RangeMap _data2;
         _setRangeMap(_data2, data2);
 
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addFilterMidiChannelMsg(_channels,_eventTypes, _data1, _data2,

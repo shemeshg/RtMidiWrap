@@ -55,8 +55,7 @@ void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
         m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * 128 + nrpnPack[m.channel].nrpnCtrlLsb;
         m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * 128 + nrpnPack[m.channel].nrpnDataLsb;
     } else {
-        m.nrpnControl = -1;
-        m.nrpnData = -1;
+        m.resetNrpnParams();
     }
 }
 
@@ -123,7 +122,10 @@ void MidiInRouter::listener(RtMidiWrap::MidiEvent &m){
     proccess14bitCc(m);
     proccessNrpn(m);
     proccessChainsAndFilters(m);
-
+    if (m.hasNrpn()){
+        m.processNrpn = true;
+        proccessChainsAndFilters(m);
+    }
 
 
 

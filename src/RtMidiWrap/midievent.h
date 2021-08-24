@@ -50,6 +50,16 @@ public:
 
     int nrpnControl = -1;
     int nrpnData = -1;
+    int processNrpn = false;
+    void resetNrpnParams(){
+        nrpnControl = -1;
+        nrpnData = -1;
+        processNrpn = false;
+    }
+
+    bool hasNrpn(){
+        return nrpnControl != -1;
+    }
 };
 }
 #endif // MIDIEVENT_H

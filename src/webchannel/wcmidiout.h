@@ -49,6 +49,7 @@ public:
     Q_INVOKABLE void setPitchBendRange( int portNumber,int semitones,int cents,QStringList channels);
     Q_INVOKABLE void sendControlChange( int portNumber,int controller,int value,QStringList channels);
     Q_INVOKABLE void setNonRegisteredParameter( int portNumber,QStringList parameter,QStringList data,QStringList channels);
+    Q_INVOKABLE void setNonRegisteredParameterInt( int portNumber,int parameter,int data,QStringList channels);
     Q_INVOKABLE void sendMessage( int portNumber,QStringList message);
     Q_INVOKABLE void restart(){
         midiout.reset(new RtMidiWrap::MidiOut());

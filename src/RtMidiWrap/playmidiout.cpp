@@ -71,6 +71,16 @@ void PlayMidiOut::setNonRegisteredParameter( std::vector<BYTE> parameter, std::v
     }
 }
 
+void PlayMidiOut::setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels){
+    std::vector<BYTE> p;
+    p.push_back(parameter >> 7); //msb
+    p.push_back(parameter & 0x7F); //lsb
+    std::vector<BYTE> d;
+    d.push_back(data >> 7);
+    d.push_back(data & 0x7F);
+    setNonRegisteredParameter(p,d,channels);
+}
+
 void PlayMidiOut::_setCurrentRegisteredParameter( std::vector<BYTE> data, std::vector<BYTE> channels){
 
     for (auto &channel : channels){

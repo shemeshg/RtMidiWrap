@@ -50,7 +50,8 @@ public:
 
     int nrpnControl = -1;
     int nrpnData = -1;
-    int processNrpn = false;
+    bool processNrpn = false;
+    bool passedThrouFilter = false;
     void resetNrpnParams(){
         nrpnControl = -1;
         nrpnData = -1;

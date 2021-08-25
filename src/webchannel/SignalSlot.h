@@ -70,6 +70,10 @@ public slots:
     void sendMessage(std::vector<BYTE> msg){
         alreadyOpenedMidiOut->sendMessage(&msg);
     }
+
+    void setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels){
+        alreadyOpenedMidiOut->setNonRegisteredParameterInt(parameter, data, channels);
+    }
 };
 
 
@@ -88,6 +92,7 @@ public:
                 )));
             qRegisterMetaType< std::vector<BYTE> >( "std::vector<BYTE>" );
             connect(this, SIGNAL(sendMessage(std::vector<BYTE>)), &s, SLOT(sendMessage(std::vector<BYTE>)));
+            connect(this, SIGNAL(setNonRegisteredParameterInt(int,int,std::vector<BYTE>)), &s, SLOT(setNonRegisteredParameterInt(int,int,std::vector<BYTE>)));
         }
 
     void sendRemoteServer(RtMidiWrap::MidiEvent &m, std::string &serverName, int serverPort, int remoteMidiPortNumber){
@@ -108,10 +113,15 @@ public:
     void doSendMessage(std::vector<BYTE> &msg){
         emit sendMessage(msg);
     }
+
+    void doSetNonRegisteredParameterInt(int parameter, int data, std::vector<BYTE> channels){
+        emit setNonRegisteredParameterInt(parameter, data, channels);
+    }
 signals:
     void test(QString in);
     void invokeMethod(QString connectionString , int remoteMidiPortNumber, QString obj, QString method, QJsonArray args);
     void sendMessage(std::vector<BYTE> msg);
+    void setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels);
 };
 
 

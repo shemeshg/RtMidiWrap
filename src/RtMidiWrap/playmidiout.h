@@ -35,6 +35,7 @@ public:
     void setPitchBendRange(BYTE semitones=0,BYTE cents=0,std::vector<BYTE> channels = channelAll);
     void sendControlChange(BYTE controller, BYTE value, std::vector<BYTE> channels = channelAll);
     void setNonRegisteredParameter( std::vector<BYTE> parameter, std::vector<BYTE> data, std::vector<BYTE> channels = channelAll);
+    void setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels = channelAll);
     void sendMessage(const std::vector<BYTE> *message);
     void sendMessage(const BYTE *message,size_t size);
 

@@ -140,6 +140,12 @@ void WcMidiOut::setNonRegisteredParameter( int portNumber,QStringList parameter,
     openedMidiOutObj[portNumber]->setNonRegisteredParameter( qStringListToVectorByte(parameter), qStringListToVectorByte(data), qStringListToVectorByte(channels));
 }
 
+void WcMidiOut::setNonRegisteredParameterInt( int portNumber,int parameter,int data,QStringList channels){
+    openPort(portNumber);
+    openedMidiOutObj[portNumber]->setNonRegisteredParameterInt( parameter, data, qStringListToVectorByte(channels));
+}
+
+
 void WcMidiOut::sendMessage( int portNumber,QStringList message){
     openPort(portNumber);
     auto msg = qStringListToVectorByte(message);

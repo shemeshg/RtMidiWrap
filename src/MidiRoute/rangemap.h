@@ -28,30 +28,15 @@ public:
 
 
    void set(int i){
-       RangeDefinition r;
-       r.fromLBound = i;
-       r.fromHBound = i;
-       r.toLBound = 1;
-       r.toHBound = 1;
-       rangeDefinitions.push_back(std::move(r));
+       set(i, i, i, i);
    }
 
    void set(int from, int to){
-       RangeDefinition r;
-       r.fromLBound = from;
-       r.fromHBound = from;
-       r.toLBound = to;
-       r.toHBound = to;
-       rangeDefinitions.push_back(std::move(r));
+        set(from, from, to, to);
    }
 
   void set(int fromLBount, int fromHBound, int toLBound){
-      RangeDefinition r;
-      r.fromLBound = fromLBount;
-      r.fromHBound = fromHBound;
-      r.toLBound = toLBound;
-      r.toHBound =  toLBound + (fromHBound - fromLBount);
-      rangeDefinitions.push_back(std::move(r));
+      set(fromLBount, fromHBound, toLBound, toLBound + (fromHBound - fromLBount));
   }
 
   void set(int fromLBount, int fromHBound, int toLBound, int toHBound){
@@ -75,8 +60,17 @@ public:
 
 
        for (RangeDefinition &rd : rangeDefinitions) {
-           float dest  =  (( ret_val -rd.fromLBound)/(rd.fromHBound-rd.fromLBound)  )*(rd.toHBound-rd.toLBound)+rd.toLBound;
-           ret_val=dest;
+           if (i <rd.fromLBound || i  > rd.fromHBound ) {
+               continue;
+           }
+           float pctOfFrom  = 0;
+           if (rd.fromHBound-rd.fromLBound > 0) {
+               float f1 = ( i - rd.fromLBound);
+               float f2 = (rd.fromHBound-rd.fromLBound);
+               pctOfFrom = f1/f2;
+           }
+           ret_val  =  pctOfFrom * (rd.toHBound-rd.toLBound)+rd.toLBound;
+
        }
 
 

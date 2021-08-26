@@ -4,6 +4,8 @@ CONFIG+=sdk_no_version_check
 # CONFIG -= app_bundle
 # no need qt ui # CONFIG -= qt
 
+
+
 # add websockets
 QT       += core websockets webchannel \
     widgets

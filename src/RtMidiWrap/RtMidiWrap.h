@@ -7,8 +7,9 @@
 
 // Platform-dependent sleep routines.
 #if defined(WIN32)
-  #include <windows.h>
-  #define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
+    #include <chrono>
+    #include <thread>
+    #define SLEEP( milliseconds ) std::this_thread::sleep_for(std::chrono::milliseconds((DWORD) milliseconds));
 #else // Unix variants
   #include <unistd.h>
   #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )

@@ -115,26 +115,26 @@ public:
     }
     Q_INVOKABLE int routingActionAddSendPortByName(int portNumber, int chainId, QString portName){
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendMidiPort(portName.toStdString());
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
     Q_INVOKABLE int routingActionAddSendPortByNumber(int portNumber, int chainId, int portNumberOut){
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendMidiPort(portNumberOut);
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
 
     Q_INVOKABLE int routingActionAddSendRemoteServer(int portNumber, int chainId, QString serverName, int serverPort, int remoteMidiPortNumber){
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendRemoteServer(*this, serverName.toStdString(), serverPort, remoteMidiPortNumber);
 
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
 
     Q_INVOKABLE int routingActionAddLogData(int portNumber, int chainId, int logto, QString userdata){
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addLogData(*this,(LOG_TO)logto, userdata.toStdString());
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
     Q_INVOKABLE int routingActionAddDeferedEvent(int portNumber, int chainId, int defferedEventType,double defferedTo){
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addDeferedEvent((RtMidiWrap::DEFFERED_EVENT_TYPE)defferedEventType,defferedTo );
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
     }
 
 
@@ -153,7 +153,7 @@ public:
         openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addFilterMidiChannelMsg(_channels,_eventTypes, _data1, _data2,
                                                                                                 (MidiRoute::MIDI_FILTER_ACTION_IF_NOT)midiFilterActionIfNot );
 
-        return openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
 
     }
 

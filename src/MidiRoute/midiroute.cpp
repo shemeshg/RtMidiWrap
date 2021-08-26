@@ -66,11 +66,11 @@ void MidiInRouter::proccessChainsAndFilters(RtMidiWrap::MidiEvent &m)
     for (unsigned i=0; i<m.data.size(); i++)
             mData.push_back(m.data[i]);
 
-    unsigned int nBytesChains = routeFilterChains->chains.size();
+    unsigned int nBytesChains = (unsigned int)routeFilterChains->chains.size();
 
     for ( unsigned int i_chain=0; i_chain<nBytesChains; i_chain++ ){
         RtMidiWrap::MidiEvent copyOfM = m;
-        unsigned int nBytesFilters = routeFilterChains->chains[i_chain]->filterMidiChannelMsgAry.size();
+        unsigned int nBytesFilters = (unsigned int)routeFilterChains->chains[i_chain]->filterMidiChannelMsgAry.size();
 
         std::vector< BYTE> copyOfData = mData;
         copyOfM.data  = copyOfData;

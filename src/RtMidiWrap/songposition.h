@@ -40,7 +40,7 @@ public:
 
     }
     void setSpp(std::vector< BYTE> &message){
-        unsigned int nBytes = message.size();
+        unsigned int nBytes = (unsigned int)message.size();
 
         int sppTotal = 0;
 

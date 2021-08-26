@@ -63,7 +63,7 @@ public:
         for (unsigned i=0; i<defferedMidiEvents.size(); ++i){
             auto m = defferedMidiEvents[i].get();
             if (m->eventStatus == RtMidiWrap::EVENT_STATUS::OK){
-                   unsigned int nBytesFilters = routeFilterChains->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry.size();
+                   unsigned int nBytesFilters = (unsigned int)routeFilterChains->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry.size();
                    for ( unsigned int i_filters= (m->defferedFilterId+1) ; i_filters<nBytesFilters; i_filters++ ){
                         routeFilterChains->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry[i_filters]->doFilter(*m);
                    }

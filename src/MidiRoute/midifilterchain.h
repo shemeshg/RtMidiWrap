@@ -18,7 +18,7 @@ public:
     };
     int addChain(){
         chains.push_back(std::unique_ptr<RoutFiltersChainClass>(new RoutFiltersChainClass()));
-        return chains.size() -1;
+        return (int)chains.size() -1;
     }
 
 

@@ -96,7 +96,7 @@ void WcMidiIn::msgSend(RtMidiWrap::MidiEvent &m, LOG_TO logto, std::string userd
         std::cout<<m.data1<<" ";
         std::cout<<m.data2<<std::endl;
 
-        unsigned int nBytes = m.data.size();
+        unsigned int nBytes = (unsigned int)m.data.size();
         for ( unsigned int i=0; i<nBytes; i++ )
             std::cout << "Byte " << i << " = " << (int)m.data.at(i) << ", ";
         std::cout<<std::endl;

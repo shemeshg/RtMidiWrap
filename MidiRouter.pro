@@ -13,7 +13,7 @@ QT       -= gui
 # CONFIG   += console
 
 macx: ICON = icon.icns
-win32: RC_ICONS = icon.ico
+win: RC_ICONS = icon.ico
 TARGET = "Midi router server"
 
 macx: LIBS += -framework CoreMIDI -framework CoreAudio -framework CoreFoundation
@@ -22,8 +22,8 @@ macx: DEFINES += __MACOSX_CORE__
 unix:!macx: LIBS += -lasound -lpthread
 unix:!macx: DEFINES += __LINUX_ALSA__
 
-win32: LIBS += -lwinmm
-win32: DEFINES += __WINDOWS_MM__
+win: LIBS += -lwinmm
+win: DEFINES += __WINDOWS_MM__
 
 SOURCES += \
         libs/QWebchannelCppClient/WebChannelClient.cpp \

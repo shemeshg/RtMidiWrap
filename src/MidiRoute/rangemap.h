@@ -56,7 +56,7 @@ public:
 
    int getVal(float i){
        int ret_val = -1;
-       if (defaultAllMaped) {ret_val = i;}
+       if (defaultAllMaped) {ret_val = (int)i;}
 
 
        for (RangeDefinition &rd : rangeDefinitions) {
@@ -66,10 +66,10 @@ public:
            float pctOfFrom  = 0;
            if (rd.fromHBound-rd.fromLBound > 0) {
                float f1 = ( i - rd.fromLBound);
-               float f2 = (rd.fromHBound-rd.fromLBound);
+               float f2 = (float)(rd.fromHBound-rd.fromLBound);
                pctOfFrom = f1/f2;
            }
-           ret_val  =  pctOfFrom * (rd.toHBound-rd.toLBound)+rd.toLBound;
+           ret_val  = (int)( pctOfFrom * (rd.toHBound-rd.toLBound)+rd.toLBound);
 
        }
 
@@ -78,7 +78,7 @@ public:
    }
 
    bool isInRange(int i){
-       return getVal(i) != -1;
+       return getVal((float)i) != -1;
    }
 
 

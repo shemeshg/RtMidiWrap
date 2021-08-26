@@ -79,7 +79,7 @@ BYTE PlayMidi::noteNameToNumber(std::string note){
 
 
 
-    int result = ((octave + 1 - floor(octaveOffset)) * 12) + semitones;
+    int result = (int)(((octave + 1 - floor(octaveOffset)) * 12) + semitones);
 
     if (note.find("#") != std::string::npos){result++;}
     if (note.find("b") != std::string::npos){result--;}

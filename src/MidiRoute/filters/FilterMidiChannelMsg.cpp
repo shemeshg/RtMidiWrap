@@ -58,7 +58,14 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
                 old_data2 = in.data[2];
                 new_data2 = old_data2;
                 passedFromFilter = passedFromFilter && fromData2.isInRange(old_data2);
-                if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal(old_data2);}
+                if (fromData2.isInRange(old_data2)){
+                    if (new_command == nrpnCommand){
+                        float f =  old_data2 + in.cc14bitLsb/127;
+                        new_data2 = fromData2.getVal(f);
+                    } else {
+                        new_data2 = fromData2.getVal(old_data2);
+                    }
+                }
             }
         }
 

@@ -29,7 +29,7 @@ public:
     void updateProperties();
     EVENT_STATUS eventStatus = EVENT_STATUS::OK;
 
-    int cc14bitLsb;
+    int cc14bitLsb = 0;
 
     std::vector< BYTE> &data;
     double deltatime;

@@ -54,7 +54,7 @@ public:
 
    }
 
-   int getVal(int i){
+   int getVal(float i){
        int ret_val = -1;
        if (defaultAllMaped) {ret_val = i;}
 

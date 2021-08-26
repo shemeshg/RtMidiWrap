@@ -5,7 +5,7 @@
 UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(parent)
 {
 
-    QLabel *labelVersion = new QLabel(tr("v0.15.0"));
+    QLabel *labelVersion = new QLabel(tr("v1.2.0"));
 
     labelServerStatus = new QLabel(tr("Status: Running"));
     if (!isServerRunning){

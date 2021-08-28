@@ -60,6 +60,9 @@ public:
 
 
        for (RangeDefinition &rd : rangeDefinitions) {
+           if (floor(i) == rd.fromHBound && i > rd.fromHBound ) {
+               i = floor(i);
+           }
            if (i <rd.fromLBound || i  > rd.fromHBound ) {
                continue;
            }

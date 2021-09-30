@@ -25,8 +25,8 @@ private:
         range.clear();
 
 
-        foreach(QVariant v, json){
-            QJsonArray j =  v.toJsonArray();
+        for(QJsonValue v: json){
+            QJsonArray j =  v.toArray();
             std::vector<int> intAry;
             for(auto i = j.begin(); i != j.end(); i++) {
                 intAry.push_back(i->toInt());

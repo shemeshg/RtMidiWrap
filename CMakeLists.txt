@@ -77,10 +77,7 @@ set(PROJECT_SOURCES
 )
 
 
-qt_add_executable(RtMidiRoute MACOSX_BUNDLE
-    MANUAL_FINALIZATION
-    ${PROJECT_SOURCES}
-)
+
 
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
@@ -100,20 +97,19 @@ if(MACOSX)
         )
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__MACOSX_CORE__")
+    set(TARGET_OS_IPHONE 0)
 
-
-###
-    # NOTE: Don't include the path in MACOSX_BUNDLE_ICON_FILE -- this is
-    # the property added to Info.plist
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)
-
-    # And this part tells CMake where to find and install the file itself
     set(APP_ICON_MACOSX ${CMAKE_CURRENT_SOURCE_DIR}/icon.icns)
     set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES
            MACOSX_PACKAGE_LOCATION "Resources")
-
-###
 endif()
+
+qt_add_executable(RtMidiRoute MACOSX_BUNDLE
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+    ${APP_ICON_MACOSX}
+)
 
 target_link_libraries(RtMidiRoute PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebSockets Qt${QT_VERSION_MAJOR}::WebChannel
     ${OsSpecificLibs}

@@ -1,5 +1,4 @@
-#ifndef MIDIROUTE_H
-#define MIDIROUTE_H
+#pragma once
 #include "src/RtMidiWrap/playmidiin.h"
 #include "src/RtMidiWrap/playmidiout.h"
 #include "midifilterchain.h"
@@ -60,5 +59,3 @@ public:
 
 
 
-
-#endif // MIDIROUTE_H

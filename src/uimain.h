@@ -1,5 +1,4 @@
-#ifndef UIMAIN_H
-#define UIMAIN_H
+#pragma once
 
 #include <QWidget>
 #include <QLineEdit>
@@ -22,4 +21,4 @@ public slots:
 
 };
 
-#endif // UIMAIN_H
+

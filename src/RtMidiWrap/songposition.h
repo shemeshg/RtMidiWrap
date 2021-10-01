@@ -1,9 +1,6 @@
-#ifndef SONGPOSITION_H
-#define SONGPOSITION_H
-//#include <string>
-//#include <iostream>
+#pragma once
+
 #include<cmath>
-//#include "RtMidiWrap.h"
 #include "common.h"
 
 namespace RtMidiWrap {
@@ -53,4 +50,4 @@ public:
 
 };
 }
-#endif // SONGPOSITION_H
+

@@ -1,5 +1,4 @@
-#ifndef PLAYMIDIOUT_H
-#define PLAYMIDIOUT_H
+#pragma once
 #include <memory>
 #include "playmidi.h"
 
@@ -64,4 +63,3 @@ public:
 
 
 
-#endif // PLAYMIDI_H

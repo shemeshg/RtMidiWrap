@@ -1,5 +1,4 @@
-#ifndef WCROUTEFILTERCHAINS_H
-#define WCROUTEFILTERCHAINS_H
+#pragma once
 #include "src/MidiRoute/midifilterchain.h"
 
 namespace Webchannel {
@@ -11,4 +10,4 @@ public:
 
 }
 
-#endif // WCROUTEFILTERCHAINS_H
+

@@ -1,5 +1,4 @@
-#ifndef LOGDATA_H
-#define LOGDATA_H
+#pragma once
 #include "src/MidiRoute/routfilter.h"
 #include "src/webchannel/EmitCommand.h"
 
@@ -27,4 +26,4 @@ public:
     };
 };
 }
-#endif // LOGDATA_H
+

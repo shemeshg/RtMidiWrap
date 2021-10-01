@@ -1,5 +1,4 @@
-#ifndef WCUSERDATA_H
-#define WCUSERDATA_H
+#pragma once
 
 #include <QObject>
 #include <QVariant>
@@ -31,4 +30,4 @@ signals:
     void applicationQuitSignal();
 };
 
-#endif // WCUSERDATA_H
+

@@ -1,9 +1,6 @@
-#ifndef SENDMIDIPORT_H
-#define SENDMIDIPORT_H
+#pragma once
 
 
-//#include "src/RtMidiWrap/RtMidiWrap.h"
-//#include "src/RtMidiWrap/midievent.h"
 #include "src/MidiRoute/midiroute.h"
 #include "src/MidiRoute/routfilter.h"
 #include "src/webchannel/SignalSlot.h"
@@ -49,4 +46,3 @@ public:
 
 
 
-#endif // SENDMIDIPORT_H

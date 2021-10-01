@@ -1,5 +1,4 @@
-#ifndef RANGEMAP_H
-#define RANGEMAP_H
+#pragma once
 #include <vector>
 #include <map>
 #include <math.h>
@@ -94,5 +93,3 @@ RangeMap setRangeMapObject(std::vector<int> &jv, RangeMap &rm);
 
 
 
-
-#endif // RANGEMAP_H

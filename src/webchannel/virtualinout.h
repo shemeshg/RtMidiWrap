@@ -1,5 +1,4 @@
-#ifndef VIRTUALINOUT_H
-#define VIRTUALINOUT_H
+#pragma once
 
 
 #include "src/RtMidiWrap/RtMidiWrap.h"
@@ -19,4 +18,4 @@ public:
 
 void addVirtualInOutPort(std::string portname);
 
-#endif // VIRTUALINOUT_H
+

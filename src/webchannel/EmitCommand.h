@@ -1,5 +1,4 @@
-#ifndef EMITCOMMAND_H
-#define EMITCOMMAND_H
+#pragma once
 #include "src/RtMidiWrap/midievent.h"
 
 
@@ -18,4 +17,4 @@ public:
 
 }
 
-#endif // EMITCOMMAND_H
+

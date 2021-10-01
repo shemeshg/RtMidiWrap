@@ -1,5 +1,4 @@
-#ifndef DEFFEREDEVENT_H
-#define DEFFEREDEVENT_H
+#pragma once
 #include "src/MidiRoute/routfilter.h"
 namespace MidiRoute {
 class DefferedEvent:public RoutFilter
@@ -22,4 +21,4 @@ public:
     };
 };
 }
-#endif // DEFFEREDEVENT_H
+

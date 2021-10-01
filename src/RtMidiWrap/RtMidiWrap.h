@@ -1,7 +1,4 @@
-#ifndef CALC_H
-#define CALC_H
-//#include <string>
-//#include <map>
+#pragma once
 #include "common.h"
 #include "libs/rtmidi/RtMidi.h"
 
@@ -86,5 +83,3 @@ public:
 
 
 
-
-#endif // CALC_H

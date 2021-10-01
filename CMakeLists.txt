@@ -84,8 +84,15 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(MACOSX TRUE)
 endif()
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+if(WIN32 OR MSVC OR MSYS OR MINGW)
+    set(WINDOWS TRUE)
+endif()
 
 if(MACOSX)
+    #RtMidi lib dependencies
     find_library(COREMIDI_LIBRARY CoreMIDI)
     find_library(COREAUDIO_LIBRARY CoreAudio)
     find_library(COREFOUNDATION_LIBRARY CoreFoundation)
@@ -99,6 +106,7 @@ if(MACOSX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__MACOSX_CORE__")
     set(TARGET_OS_IPHONE 0)
 
+    # Application icon
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)
     set(APP_ICON_MACOSX ${CMAKE_CURRENT_SOURCE_DIR}/icon.icns)
     set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES

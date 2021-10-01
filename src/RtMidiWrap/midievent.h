@@ -1,7 +1,6 @@
-#ifndef MIDIEVENT_H
-#define MIDIEVENT_H
+#pragma once
 #include "common.h"
-//#include <string>
+
 
 
 
@@ -63,4 +62,4 @@ public:
     }
 };
 }
-#endif // MIDIEVENT_H
+

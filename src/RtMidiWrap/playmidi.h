@@ -1,6 +1,4 @@
-#ifndef PLAYMIDI_H
-#define PLAYMIDI_H
-
+#pragma once
 #include "RtMidiWrap.h"
 #include <algorithm>
 #include <cctype>
@@ -52,4 +50,4 @@ public:
 
 }
 
-#endif // PLAYMIDI_H
+

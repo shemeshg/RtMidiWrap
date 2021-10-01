@@ -1,5 +1,4 @@
-#ifndef SIGNALSLOT_H
-#define SIGNALSLOT_H
+#pragma once
 #include <QObject>
 #include <QDebug>
 #include <iostream>
@@ -125,4 +124,4 @@ signals:
 };
 
 
-#endif // SIGNALSLOT_H
+

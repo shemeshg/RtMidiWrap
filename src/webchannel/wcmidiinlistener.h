@@ -1,5 +1,4 @@
-#ifndef WCMIDIINLISTENER_H
-#define WCMIDIINLISTENER_H
+#pragma once
 #include "src/MidiRoute/midiroute.h"
 #include "EmitCommand.h"
 #include "WcRouteFilterChains.h"
@@ -96,5 +95,5 @@ public:
 
 };
 }
-#endif // WCMIDIINLISTENER_H
+
 

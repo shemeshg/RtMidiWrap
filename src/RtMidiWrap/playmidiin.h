@@ -1,5 +1,4 @@
-#ifndef PLAYMIDIIN_H
-#define PLAYMIDIIN_H
+#pragma once
 #include <memory>
 #include "playmidi.h"
 #include "songposition.h"
@@ -38,4 +37,4 @@ public:
 };
 }
 
-#endif // PLAYMIDIIN_H
+

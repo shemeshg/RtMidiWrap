@@ -1,5 +1,4 @@
-#ifndef SENDREMOTESERVER_H
-#define SENDREMOTESERVER_H
+#pragma once
 #include "src/MidiRoute/routfilter.h"
 #include "src/webchannel/EmitCommand.h"
 #include "src/webchannel/SignalSlot.h"
@@ -37,4 +36,4 @@ public:
 
 
 
-#endif // SENDREMOTESERVER_H
+

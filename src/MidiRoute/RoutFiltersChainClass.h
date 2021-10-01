@@ -1,6 +1,4 @@
-#ifndef ROUTFILTERSCHAINCLASS_H
-#define ROUTFILTERSCHAINCLASS_H
-
+#pragma once
 #include "filters/sendmidiport.h"
 #include "filters/FilterMidiChannelMsg.h"
 #include "filters/logdata.h"
@@ -55,4 +53,4 @@ public:
 
 }
 
-#endif // ROUTFILTERSCHAINCLASS_H
+

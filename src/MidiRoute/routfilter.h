@@ -1,5 +1,4 @@
-#ifndef ROUTFILTER_H
-#define ROUTFILTER_H
+#pragma once
 #include "src/RtMidiWrap/midievent.h"
 
 namespace MidiRoute {
@@ -23,4 +22,4 @@ public:
 
 
 }
-#endif // ROUTFILTER_H
+

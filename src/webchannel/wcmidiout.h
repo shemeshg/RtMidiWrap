@@ -1,5 +1,4 @@
-#ifndef WCMIDIOUT_H
-#define WCMIDIOUT_H
+#pragma once
 
 #include <QObject>
 #include <QStringList>
@@ -124,4 +123,4 @@ signals:
     bool msgToClient(QString msg);
 };
 }
-#endif // WCMIDIOUT_H
+

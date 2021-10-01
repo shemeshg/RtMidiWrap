@@ -1,5 +1,4 @@
-#ifndef MAINCLASS_H
-#define MAINCLASS_H
+#pragma once
 #include <QApplication>
 
 class MainClass
@@ -14,4 +13,4 @@ private:
 
 };
 
-#endif // MAINCLASS_H
+

@@ -1,9 +1,5 @@
-#ifndef FILTERMIDICHANNELMSG_H
-#define FILTERMIDICHANNELMSG_H
+#pragma once
 
-//#include "src/RtMidiWrap/RtMidiWrap.h"
-//#include "src/RtMidiWrap/midievent.h"
-//#include "src/MidiRoute/midiroute.h"
 #include "src/MidiRoute/routfilter.h"
 #include "src/MidiRoute/rangemap.h"
 
@@ -40,4 +36,4 @@ public:
 };
 
 }
-#endif // FILTERMIDICHANNELMSG_H
+

@@ -1,5 +1,4 @@
-#ifndef WCMIDIIN_H
-#define WCMIDIIN_H
+#pragma once
 
 #include <QObject>
 #include <QStringList>
@@ -164,4 +163,4 @@ signals:
 };
 }
 
-#endif // WCMIDIIN_H
+

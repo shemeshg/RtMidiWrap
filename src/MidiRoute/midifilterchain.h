@@ -1,6 +1,4 @@
-
-#ifndef MIDIFILTERCHAIN_H
-#define MIDIFILTERCHAIN_H
+#pragma once
 
 #include "RoutFiltersChainClass.h"
 
@@ -25,4 +23,4 @@ public:
 };
 
 }
-#endif // MIDIFILTERCHAIN_H
+

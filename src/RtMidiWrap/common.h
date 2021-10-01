@@ -1,5 +1,4 @@
-#ifndef COMMON_H
-#define COMMON_H
+#pragma once
 #include <string>
 #include <map>
 #include <vector>
@@ -193,4 +192,4 @@ public:
 
 
 }
-#endif // COMMON_H
+

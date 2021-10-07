@@ -104,7 +104,6 @@ if(MACOSX)
         )
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__MACOSX_CORE__")
-    set(TARGET_OS_IPHONE 0)
 
     # Application icon
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)

@@ -15,7 +15,7 @@
 #include "src/webchannel/wcuserdata.h"
 #include "src/webchannel/virtualinout.h"
 
-#include "uimain.h"
+
 
 using namespace Webchannel;
 
@@ -53,8 +53,8 @@ void MainClass::parseParams()
 }
 
 
-int MainClass::connectAndExec(){
-    bool serverIsRunning = false;
+void MainClass::connectAndExec(){
+
     QWebSocketServer server(QStringLiteral("QWebChannel Standalone Example Server"),
                             QWebSocketServer::NonSecureMode);
     if (!server.listen(QHostAddress::Any, port)) {
@@ -65,9 +65,7 @@ int MainClass::connectAndExec(){
     }
 
     if (!serverIsRunning){
-        UiMain uimain(serverIsRunning, port);
-        uimain.show();
-        return app.exec();
+        return;
     }
 
     // wrap WebSocket clients in QWebChannelAbstractTransport objects
@@ -88,7 +86,5 @@ int MainClass::connectAndExec(){
     QObject::connect(wcuserdata, SIGNAL(applicationQuitSignal()), &app, SLOT(quit()));
 
 
-    UiMain uimain(serverIsRunning, port);
-    uimain.showMinimized();
-    return app.exec();
+
 }

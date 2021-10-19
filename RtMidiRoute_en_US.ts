@@ -4,33 +4,60 @@
 <context>
     <name>UiMain</name>
     <message>
-        <location filename="src/uimain.cpp" line="8"/>
-        <source>v1.2.0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="src/uimain.cpp" line="10"/>
+        <location filename="src/uimain.cpp" line="14"/>
         <source>Status: Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/uimain.cpp" line="12"/>
+        <location filename="src/uimain.cpp" line="16"/>
         <source>Status: Not running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/uimain.cpp" line="15"/>
+        <location filename="src/uimain.cpp" line="19"/>
         <source>Port number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/uimain.cpp" line="19"/>
+        <location filename="src/uimain.cpp" line="23"/>
         <source>Save and quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/uimain.cpp" line="38"/>
+        <location filename="src/uimain.cpp" line="42"/>
         <source>Midi Router Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="47"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="48"/>
+        <source>Show the application&apos;s About box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="51"/>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="52"/>
+        <source>Show the Qt library&apos;s About box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="74"/>
+        <source>About Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="12"/>
+        <location filename="src/uimain.cpp" line="75"/>
+        <source>Version %1</source>
+        <oldsource>Version 1.2.0</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

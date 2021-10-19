@@ -15,6 +15,10 @@ private:
     QLineEdit *namePortNumber;
     QLabel *labelServerStatus;
     QPushButton *saveAndQuitButton;
+
+private slots:
+    void about();
+
 signals:
 public slots:
     void saveAndQuit();

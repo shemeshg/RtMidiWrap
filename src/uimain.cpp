@@ -1,11 +1,15 @@
 #include "uimain.h"
+#include "config.h"
 #include <QGridLayout>
 #include <QSettings>
+#include <QMenuBar>
+#include <QApplication>
+#include <QMessageBox>
 
 UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(parent)
 {
 
-    QLabel *labelVersion = new QLabel(tr("v1.2.0"));
+    QLabel *labelVersion = new QLabel(tr("Version %1").arg(PROJECT_VER));
 
     labelServerStatus = new QLabel(tr("Status: Running"));
     if (!isServerRunning){
@@ -36,6 +40,25 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
     //![setting the layout]
     setLayout(mainLayout);
     setWindowTitle(tr("Midi Router Server"));
+
+
+    QMenuBar* menuBar = new QMenuBar();
+    QMenu *fileMenu = new QMenu("Help");
+    QAction *aboutAct = new QAction(tr("&About"), this);
+    aboutAct->setStatusTip(tr("Show the application's About box"));
+    connect(aboutAct, &QAction::triggered, this, &UiMain::about);
+
+    QAction *aboutQtAct = new QAction(tr("About &Qt"), this);
+    aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+    connect(aboutQtAct, &QAction::triggered, this, &QApplication::aboutQt);
+
+
+    fileMenu->addAction(aboutAct);
+    fileMenu->addAction(aboutQtAct);
+    fileMenu->addAction("Quit");
+    menuBar->addMenu(fileMenu);
+
+    mainLayout->setMenuBar(menuBar);
 }
 
 void UiMain::saveAndQuit()
@@ -44,4 +67,10 @@ void UiMain::saveAndQuit()
     int serverPortToSet = namePortNumber->text().toInt();
     settings.setValue("server/port", serverPortToSet);
     close();
+}
+
+void UiMain::about()
+{
+    QMessageBox::about(this, tr("About Menu"),
+            tr("Version %1").arg(PROJECT_VER) );
 }

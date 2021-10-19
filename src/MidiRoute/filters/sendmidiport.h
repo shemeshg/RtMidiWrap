@@ -3,7 +3,7 @@
 
 #include "src/MidiRoute/midiroute.h"
 #include "src/MidiRoute/routfilter.h"
-#include "src/webchannel/SignalSlot.h"
+#include "src/MidiRoute/filters/SignalSlot.h"
 
 namespace MidiRoute {
 

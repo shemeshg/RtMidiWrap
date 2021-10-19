@@ -1,7 +1,7 @@
 #pragma once
 #include "src/MidiRoute/routfilter.h"
 #include "src/webchannel/EmitCommand.h"
-#include "src/webchannel/SignalSlot.h"
+#include "src/MidiRoute/filters/SignalSlot.h"
 
 namespace MidiRoute {
 

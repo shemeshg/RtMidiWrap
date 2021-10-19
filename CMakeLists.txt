@@ -46,6 +46,7 @@ set(PROJECT_SOURCES
     src/MidiRoute/filters/defferedevent.h
     src/MidiRoute/filters/logdata.h
     src/MidiRoute/filters/sendmidiport.h
+    src/MidiRoute/filters/SignalSlot.h
     src/MidiRoute/midifilterchain.h
     src/MidiRoute/midiroute.h
     src/MidiRoute/rangemap.h
@@ -53,7 +54,6 @@ set(PROJECT_SOURCES
     src/mainclass.h
     src/uimain.h
     src/webchannel/EmitCommand.h
-    src/webchannel/SignalSlot.h
     src/webchannel/WcRouteFilterChains.h
     src/webchannel/virtualinout.h
     src/webchannel/wcmidiin.h

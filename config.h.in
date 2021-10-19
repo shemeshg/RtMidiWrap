@@ -1,5 +1,4 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 #define PROJECT_NAME "@PROJECT_NAME@"
 #define PROJECT_VER  "@PROJECT_VERSION@"
@@ -7,4 +6,3 @@
 #define PROJECT_VER_MINOR "@PROJECT_VERSION_MINOR@"
 #define PTOJECT_VER_PATCH "@PROJECT_VERSION_PATCH@"
 
-#endif // CONFIG_H

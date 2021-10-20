@@ -1,6 +1,9 @@
 # RtMidi c++ wrapper 
 
 - Wrap RtMidi In [WbMidi.js](https://github.com/djipco/webmidi) format.
+
+The library is here https://github.com/shemeshg/RtMidiWrap/tree/master/src/RtMidiRouterLib/RtMidiWrap
+
 - Demonstrate how to use ity as an advanced Midi router.
 
 1. Route midi over the network.
@@ -12,28 +15,13 @@ https://github.com/shemeshg/midi-router-client
 
 [Compiled server and client for OSX or linux:](https://sourceforge.net/projects/midi-router-client/)
 
-For linux
 
-`sudo apt-get install librtmidi-dev`
-
-https://drive.google.com/file/d/1Evk11elK0Bz3tUgQk6zapEgk_O9-AUyF/view?usp=sharing
 
 ## Getting Started
 
 ### Prerequisites
 
-OSX
-```
-# brew install RtMidi
-
-```
-
-Linux
-```
-# sudo apt-get install librtmidi-dev
-```
-
-Project file is a QtCreate format, so it is best to be opened with QtCreate.
+Project file is a Qt6, however the RtMidiWrap library is standard c++.
 
 
 ### Installing

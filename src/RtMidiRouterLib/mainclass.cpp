@@ -55,9 +55,9 @@ void MainClass::parseParams()
 
 void MainClass::connectAndExec(){
 
-    QWebSocketServer server(QStringLiteral("QWebChannel Standalone Example Server"),
+    QWebSocketServer *server = new QWebSocketServer(QStringLiteral("QWebChannel Standalone Example Server"),
                             QWebSocketServer::NonSecureMode);
-    if (!server.listen(QHostAddress::Any, port)) {
+    if (!server->listen(QHostAddress::Any, port)) {
         //qFatal("Failed to open web socket server.");
         serverIsRunning = false;
     } else {
@@ -69,20 +69,20 @@ void MainClass::connectAndExec(){
     }
 
     // wrap WebSocket clients in QWebChannelAbstractTransport objects
-    WebSocketClientWrapper clientWrapper(&server);
+    WebSocketClientWrapper *clientWrapper=new WebSocketClientWrapper(server);
 
     // setup the channel
-    QWebChannel channel;
-    QObject::connect(&clientWrapper, &WebSocketClientWrapper::clientConnected,
-                     &channel, &QWebChannel::connectTo);
+    QWebChannel *channel=new QWebChannel();
+    QObject::connect(clientWrapper, &WebSocketClientWrapper::clientConnected,
+                     channel, &QWebChannel::connectTo);
 
     // setup the dialog and publish it to the QWebChannel
     WcMidiOut* wcmidiout = new WcMidiOut(&app);
-    channel.registerObject(QStringLiteral("wcmidiout"), wcmidiout);
+    channel->registerObject(QStringLiteral("wcmidiout"), wcmidiout);
     WcMidiIn* wcmidiin = new WcMidiIn(&app);
-    channel.registerObject(QStringLiteral("wcmidiin"), wcmidiin);
+    channel->registerObject(QStringLiteral("wcmidiin"), wcmidiin);
     WcUserData* wcuserdata = new WcUserData(&app);
-    channel.registerObject(QStringLiteral("wcuserdata"), wcuserdata);
+    channel->registerObject(QStringLiteral("wcuserdata"), wcuserdata);
     QObject::connect(wcuserdata, SIGNAL(applicationQuitSignal()), &app, SLOT(quit()));
 
 

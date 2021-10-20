@@ -1,8 +1,8 @@
-//#include "src/RtMidiWrap/RtMidiWrap.h"
-//#include "src/RtMidiWrap/midievent.h"
-#include "src/MidiRoute/midiroute.h"
-//#include "src/MidiRoute/routfilter.h"
-//#include "src/MidiRoute/rangemap.h"
+//#include "RtMidiWrap/RtMidiWrap.h"
+//#include "RtMidiWrap/midievent.h"
+#include "MidiRoute/midiroute.h"
+//#include "MidiRoute/routfilter.h"
+//#include "MidiRoute/rangemap.h"
 
 namespace MidiRoute {
 void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, RangeMap &fromCommand, RangeMap &fromData1, RangeMap &fromData2,

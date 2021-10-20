@@ -1,4 +1,4 @@
-#include "src/mainclass.h"
+#include "src/RtMidiRouterLib/mainclass.h"
 #include "src/uimain.h"
 #include <QIcon>
 

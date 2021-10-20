@@ -1,6 +1,6 @@
 #pragma once
-#include "src/MidiRoute/routfilter.h"
-#include "src/webchannel/EmitCommand.h"
+#include "MidiRoute/routfilter.h"
+#include "webchannel/EmitCommand.h"
 
 
 namespace MidiRoute {

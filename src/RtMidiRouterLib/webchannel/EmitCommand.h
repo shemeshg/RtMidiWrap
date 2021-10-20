@@ -1,5 +1,5 @@
 #pragma once
-#include "src/RtMidiWrap/midievent.h"
+#include "RtMidiWrap/midievent.h"
 
 
 namespace Webchannel {

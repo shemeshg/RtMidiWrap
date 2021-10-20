@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "src/RtMidiWrap/RtMidiWrap.h"
+#include "RtMidiWrap/RtMidiWrap.h"
 #include <string>
 #include <memory>
 

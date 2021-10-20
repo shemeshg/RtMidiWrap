@@ -10,10 +10,10 @@
 #include <QtCore/QCommandLineOption>
 #include <QSettings>
 
-#include "src/webchannel/wcmidiout.h"
-#include "src/webchannel/wcmidiin.h"
-#include "src/webchannel/wcuserdata.h"
-#include "src/webchannel/virtualinout.h"
+#include "webchannel/wcmidiout.h"
+#include "webchannel/wcmidiin.h"
+#include "webchannel/wcuserdata.h"
+#include "webchannel/virtualinout.h"
 
 
 

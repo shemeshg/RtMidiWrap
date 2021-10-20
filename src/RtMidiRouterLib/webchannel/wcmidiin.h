@@ -9,8 +9,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QWebSocket>
-#include "src/MidiRoute/rangemap.h"
-#include "src/webchannel/wcmidiinlistener.h"
+#include "MidiRoute/rangemap.h"
+#include "webchannel/wcmidiinlistener.h"
 #include "libs/QWebchannelCppClient/WebChannelClient.h"
 #include "virtualinout.h"
 

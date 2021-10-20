@@ -64,12 +64,12 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="src/mainclass.cpp" line="39"/>
+        <location filename="src/RtMidiRouterLib/mainclass.cpp" line="39"/>
         <source>Port for midi server [default: 12345].</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainclass.cpp" line="40"/>
+        <location filename="src/RtMidiRouterLib/mainclass.cpp" line="40"/>
         <source>port</source>
         <translation type="unfinished"></translation>
     </message>

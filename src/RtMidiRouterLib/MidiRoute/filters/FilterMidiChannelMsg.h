@@ -1,7 +1,7 @@
 #pragma once
 
-#include "src/MidiRoute/routfilter.h"
-#include "src/MidiRoute/rangemap.h"
+#include "MidiRoute/routfilter.h"
+#include "MidiRoute/rangemap.h"
 
 namespace MidiRoute {
 

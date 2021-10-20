@@ -1,6 +1,6 @@
 #pragma once
-#include "src/RtMidiWrap/playmidiin.h"
-#include "src/RtMidiWrap/playmidiout.h"
+#include "RtMidiWrap/playmidiin.h"
+#include "RtMidiWrap/playmidiout.h"
 #include "midifilterchain.h"
 
 

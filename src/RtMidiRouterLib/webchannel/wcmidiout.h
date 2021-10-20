@@ -7,7 +7,7 @@
 #include <QVector>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include "src/RtMidiWrap/playmidiout.h"
+#include "RtMidiWrap/playmidiout.h"
 namespace Webchannel {
 class WcMidiOut : public QObject
 {

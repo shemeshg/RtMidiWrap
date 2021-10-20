@@ -57,7 +57,7 @@ add_library(RtMidiWrap STATIC
 # by this library
 
 target_include_directories(RtMidiWrap PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/RtMidiWrap"
+    "${CMAKE_CURRENT_SOURCE_DIR}/RtMidiWrap"
 )
 
 target_link_libraries(RtMidiWrap PRIVATE

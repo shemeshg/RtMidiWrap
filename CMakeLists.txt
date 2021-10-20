@@ -14,52 +14,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${PROJECT_SOURCE_DIR}/config.h")
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools WebSockets WebChannel REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools WebSockets WebChannel REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools REQUIRED)
 
 set(TS_FILES RtMidiRoute_en_US.ts)
 set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/rc.qrc")
 
-add_subdirectory(src/RtMidiWrap)
+add_subdirectory(src/RtMidiRouterLib)
 
 set(PROJECT_SOURCES
-    libs/QWebchannelCppClient/WebChannelClient.cpp
-    libs/websocket/websocketclientwrapper.cpp
-    libs/websocket/websockettransport.cpp
     main.cpp
-    src/MidiRoute/filters/FilterMidiChannelMsg.cpp
-    src/MidiRoute/filters/logdata.cpp
-    src/MidiRoute/midiroute.cpp
-    src/MidiRoute/rangemap.cpp
-    src/mainclass.cpp
     src/uimain.cpp
-    src/webchannel/virtualinout.cpp
-    src/webchannel/wcmidiin.cpp
-    src/webchannel/wcmidiout.cpp
-    src/webchannel/wcuserdata.cpp
-    libs/QWebchannelCppClient/WebChannelClient.h
-    libs/websocket/websocketclientwrapper.h
-    libs/websocket/websockettransport.h
-    src/MidiRoute/RoutFiltersChainClass.h
-    src/MidiRoute/filters/FilterMidiChannelMsg.h
-    src/MidiRoute/filters/SendRemoteServer.h
-    src/MidiRoute/filters/defferedevent.h
-    src/MidiRoute/filters/logdata.h
-    src/MidiRoute/filters/sendmidiport.h
-    src/MidiRoute/filters/SignalSlot.h
-    src/MidiRoute/midifilterchain.h
-    src/MidiRoute/midiroute.h
-    src/MidiRoute/rangemap.h
-    src/MidiRoute/routfilter.h
-    src/mainclass.h
-    src/uimain.h
-    src/webchannel/EmitCommand.h
-    src/webchannel/WcRouteFilterChains.h
-    src/webchannel/virtualinout.h
-    src/webchannel/wcmidiin.h
-    src/webchannel/wcmidiinlistener.h
-    src/webchannel/wcmidiout.h
-    src/webchannel/wcuserdata.h
+    src/RtMidiRouterLib/mainclass.h
+    src/uimain.h    
         ${TS_FILES}
         ${APP_ICON_RESOURCE_WINDOWS}
 )
@@ -93,8 +60,8 @@ qt_add_executable(RtMidiRoute MACOSX_BUNDLE
     ${APP_ICON_MACOSX}
 )
 
-target_link_libraries(RtMidiRoute PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebSockets Qt${QT_VERSION_MAJOR}::WebChannel
-    RtMidiWrap
+target_link_libraries(RtMidiRoute PRIVATE Qt${QT_VERSION_MAJOR}::Widgets 
+    RtMidiRouterLib
     )
 
 set_target_properties(RtMidiRoute PROPERTIES

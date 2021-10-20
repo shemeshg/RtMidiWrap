@@ -4,9 +4,9 @@
 #include <iostream>
 #include <QWebSocket>
 #include "libs/QWebchannelCppClient/WebChannelClient.h"
-#include "src/RtMidiWrap/midievent.h"
+#include "RtMidiWrap/midievent.h"
 
-#include "src/RtMidiWrap/playmidiout.h"
+#include "RtMidiWrap/playmidiout.h"
 
 class SignalSlotClass : public QObject
 {

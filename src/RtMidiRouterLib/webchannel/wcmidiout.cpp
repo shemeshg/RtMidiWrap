@@ -2,7 +2,7 @@
 //#include <QStringList>
 //#include <QVariantMap>
 //#include <string>
-//#include "src/RtMidiWrap/playmidiout.h"
+//#include "RtMidiWrap/playmidiout.h"
 namespace Webchannel {
 WcMidiOut::WcMidiOut(QObject *parent) : QObject(parent)
 {

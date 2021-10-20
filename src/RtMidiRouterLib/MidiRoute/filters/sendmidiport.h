@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "src/MidiRoute/midiroute.h"
-#include "src/MidiRoute/routfilter.h"
-#include "src/MidiRoute/filters/SignalSlot.h"
+#include "MidiRoute/midiroute.h"
+#include "MidiRoute/routfilter.h"
+#include "MidiRoute/filters/SignalSlot.h"
 
 namespace MidiRoute {
 

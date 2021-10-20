@@ -45,8 +45,26 @@ if(MACOSX)
         )
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__MACOSX_CORE__")
-
 endif()
+
+if(LINUX)
+    FIND_PACKAGE(ALSA REQUIRED)
+    INCLUDE_DIRECTORIES(${ALSA_INCLUDE_DIRS})
+
+    list(APPEND OsSpecificLibs
+        ${ALSA_LIBRARY}
+        )
+
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__LINUX_ALSA__")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__LINUX_ALSASEQ__")
+ endif()
+
+ if(WINDOWS)
+     list(APPEND OsSpecificLibs
+         winmm
+         )
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__WINDOWS_MM__")
+ endif()
 
 # Declare the library
 add_library(RtMidiWrap STATIC

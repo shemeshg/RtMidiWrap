@@ -43,19 +43,22 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
 
 
     QMenuBar* menuBar = new QMenuBar();
-    QMenu *fileMenu = new QMenu("Help");
-    QAction *aboutAct = new QAction(tr("&About"), this);
+    QMenu *fileMenu = new QMenu("File");
+    QAction *aboutAct = new QAction(tr("About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, &QAction::triggered, this, &UiMain::about);
 
-    QAction *aboutQtAct = new QAction(tr("About &Qt"), this);
+    QAction *aboutQtAct = new QAction(tr("About Qt"), this);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, &QAction::triggered, this, &QApplication::aboutQt);
 
+    QAction *quitQtAct = new QAction(tr("Quit"), this);
+    quitQtAct->setStatusTip(tr("Quit"));
+    connect(quitQtAct, &QAction::triggered, this, &QApplication::quit);
 
     fileMenu->addAction(aboutAct);
     fileMenu->addAction(aboutQtAct);
-    fileMenu->addAction("Quit");
+    fileMenu->addAction(quitQtAct);
     menuBar->addMenu(fileMenu);
 
     mainLayout->setMenuBar(menuBar);

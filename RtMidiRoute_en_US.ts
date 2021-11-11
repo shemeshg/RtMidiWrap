@@ -30,7 +30,8 @@
     </message>
     <message>
         <location filename="src/uimain.cpp" line="47"/>
-        <source>&amp;About</source>
+        <source>About</source>
+        <oldsource>&amp;About</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -40,7 +41,8 @@
     </message>
     <message>
         <location filename="src/uimain.cpp" line="51"/>
-        <source>About &amp;Qt</source>
+        <source>About Qt</source>
+        <oldsource>About &amp;Qt</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -49,13 +51,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/uimain.cpp" line="74"/>
+        <location filename="src/uimain.cpp" line="55"/>
+        <location filename="src/uimain.cpp" line="56"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/uimain.cpp" line="77"/>
         <source>About Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/uimain.cpp" line="12"/>
-        <location filename="src/uimain.cpp" line="75"/>
+        <location filename="src/uimain.cpp" line="78"/>
         <source>Version %1</source>
         <oldsource>Version 1.2.0</oldsource>
         <translation type="unfinished"></translation>

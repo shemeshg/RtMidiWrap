@@ -1,8 +1,12 @@
 # RtMidi c++ wrapper
 
-- Wrap RtMidi In [WbMidi.js](https://github.com/djipco/webmidi) format.
+- Wrap RtMidi In [WebMidi.js](https://github.com/djipco/webmidi) format.
 
-The library is here https://github.com/shemeshg/RtMidiWrap/tree/master/src/RtMidiRouterLib/RtMidiWrap
+The library is here https://github.com/shemeshg/RtMidiWrap/tree/master/src/RtMidiRouterLib/RtMidiWrap 
+
+To install, copy this folder to your project.
+
+All function names and parameters are the same as in [WebMidi.js (version 2)](https://github.com/djipco/webmidi).
 
 - The project of advanced Midi router is this repository.
 

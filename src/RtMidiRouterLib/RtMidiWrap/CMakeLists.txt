@@ -48,15 +48,17 @@ if(MACOSX)
 endif()
 
 if(LINUX)
-    FIND_PACKAGE(ALSA REQUIRED)
-    INCLUDE_DIRECTORIES(${ALSA_INCLUDE_DIRS})
+    option(RTMIDI_API_ALSA "Compile with ALSA support." ON)
+    set(NEED_PTHREAD ON)
+    find_package(ALSA)
+    if (NOT ALSA_FOUND)
+      message(FATAL_ERROR "ALSA API requested but no ALSA dev libraries found")
+    endif()
+    list(APPEND INCDIRS ${ALSA_INCLUDE_DIR})
+    list(APPEND LINKLIBS ${ALSA_LIBRARY})
 
-    list(APPEND OsSpecificLibs
-        ${ALSA_LIBRARY}
-        )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__LINUX_ALSA__")
 
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__LINUX_ALSA__")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__LINUX_ALSASEQ__")
  endif()
 
  if(WINDOWS)
@@ -74,10 +76,13 @@ add_library(RtMidiWrap STATIC
 # Specify here the include directories exported
 # by this library
 
-target_include_directories(RtMidiWrap PUBLIC
+target_include_directories(RtMidiWrap
+    PRIVATE ${INCDIRS}
+    PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/RtMidiWrap"
 )
 
 target_link_libraries(RtMidiWrap PRIVATE
     ${OsSpecificLibs}
+    ${LINKLIBS}
     )

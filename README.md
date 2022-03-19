@@ -1,6 +1,6 @@
 # RtMidi c++ wrapper
 
-<a href="https://sourceforge.net/projects/midi-router-client"><img alt="Midi router Reviews" src="https://sourceforge.net/cdn/syndication/badge_img/3211406/oss-rising-star-white?achievement=oss-rising-star&amp;r=https://sourceforge.net/p/midi-router-client/admin/files/badges"  style="min-width: 60px; max-width:200px; width:100%;"></a>
+<a href="https://sourceforge.net/projects/midi-router-client"><img alt="Midi router Reviews" src="https://sourceforge.net/cdn/syndication/badge_img/3211406/oss-rising-star-white?achievement=oss-rising-star&amp;r=https://sourceforge.net/p/midi-router-client/admin/files/badges"  style="width: 60px;"></a>
 
 
 

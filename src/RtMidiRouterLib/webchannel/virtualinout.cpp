@@ -4,7 +4,7 @@
 
 void virtualInOutPortCallback( double deltatime, std::vector< unsigned char > *message, void *userData )
 {
-    UNUSED(deltatime);
+    (void)deltatime;
     VirtualInOut *midioutVirtual = static_cast<VirtualInOut*>(userData);
     midioutVirtual->midioutVirtual->sendMessage(message);
 

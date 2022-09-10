@@ -7,7 +7,6 @@ public:
     RtMidiWrap::DEFFERED_EVENT_TYPE defferedEventType;
     double defferedTo;
 
-    ~DefferedEvent() { };
     DefferedEvent(RtMidiWrap::DEFFERED_EVENT_TYPE defferedEventType, double defferedTo): defferedEventType{defferedEventType},defferedTo{defferedTo} {
     };
 

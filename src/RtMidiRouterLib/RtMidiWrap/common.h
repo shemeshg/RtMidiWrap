@@ -4,7 +4,6 @@
 #include <vector>
 
 typedef unsigned char BYTE;
-#define UNUSED(expr) do { (void)(expr); } while (0)
 
 namespace RtMidiWrap {
 enum MIDI_MSG_TYPE {
@@ -53,7 +52,7 @@ public:
         {MIDI_SYSTEM_MESSAGES::reset , "reset"}
     };
 
-    std::map<int,std::string> mapMIDI_CHANNEL_MODE_MESSAGES = {
+    const std::map<int,std::string> mapMIDI_CHANNEL_MODE_MESSAGES = {
         {120,"allsoundoff"},
         {121,"resetallcontrollers"},
         {122,"localcontrol"},
@@ -63,7 +62,7 @@ public:
         {126,"monomodeon"},
         {127,"polymodeon"}};
 
-    std::map<int,std::string> mapMIDI_CONTROL_CHANGE_MESSAGES = {
+    const std::map<int,std::string> mapMIDI_CONTROL_CHANGE_MESSAGES = {
         {0,"bankselectcoarse"},
         {1,"modulationwheelcoarse"},
         {2,"breathcontrollercoarse"},
@@ -151,9 +150,9 @@ public:
 
     //static defs
     typedef std::map<std::string, int> SiMap;
-    static SiMap _semitones;
+    const static SiMap _semitones;
 
-    static std::vector<BYTE> channelAll;
+    const static std::vector<BYTE> channelAll;
 
     enum MIDI_REGISTERED_PARAMETER{
         pitchbendrange,
@@ -173,7 +172,7 @@ public:
         rollangle
     };
     typedef std::map<MIDI_REGISTERED_PARAMETER, std::vector<BYTE>> MrpMap;
-    static MrpMap midiRegisteredParameter;
+    const static MrpMap midiRegisteredParameter;
 
     enum MIDI_CHANNEL_MODE_MESSAGES {
 

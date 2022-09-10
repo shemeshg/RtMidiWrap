@@ -15,7 +15,6 @@ public:
     std::string userdata;
 
 
-    ~LogData() { };
     LogData(Webchannel::EmitCommand &ec, Webchannel::LOG_TO logto, std::string userdata): ec{ec},logto{logto}, userdata{userdata} {
     };
 

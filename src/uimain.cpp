@@ -11,16 +11,16 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
 
     QLabel *labelVersion = new QLabel(tr("Version %1").arg(PROJECT_VER));
 
-    labelServerStatus = new QLabel(tr("Status: Running"));
+    labelServerStatus = new QLabel(tr("Status: Running")); //NOLINT
     if (!isServerRunning){
         labelServerStatus->setText(tr("Status: Not running"));
     }
 
     QLabel *labelPortNumber = new QLabel(tr("Port number:"));
-    namePortNumber = new QLineEdit;
+    namePortNumber = new QLineEdit; //NOLINT
     namePortNumber->setText(QString::number(portNumber));
 
-    saveAndQuitButton = new QPushButton(tr("Save and quit"));
+    saveAndQuitButton = new QPushButton(tr("Save and quit")); //NOLINT
     saveAndQuitButton->show();
 
     connect(saveAndQuitButton, &QPushButton::clicked,
@@ -29,7 +29,7 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
     //! [constructor and input fields]
 
     //! [layout]
-    QGridLayout *mainLayout = new QGridLayout;
+    QGridLayout *mainLayout = new QGridLayout; //NOLINT
     mainLayout->addWidget(labelServerStatus, 0, 0, 1, 2);
     mainLayout->addWidget(labelPortNumber, 1, 0, Qt::AlignTop);
     mainLayout->addWidget(namePortNumber, 1, 1);    
@@ -42,7 +42,7 @@ UiMain::UiMain(bool isServerRunning, int portNumber, QWidget *parent) : QWidget(
     setWindowTitle(tr("Midi Router Server"));
 
 
-    QMenuBar* menuBar = new QMenuBar();
+    QMenuBar* menuBar = new QMenuBar(); //NOLINT
     QMenu *fileMenu = new QMenu("File");
     QAction *aboutAct = new QAction(tr("About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));

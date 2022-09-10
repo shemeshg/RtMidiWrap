@@ -71,7 +71,7 @@ BYTE PlayMidi::noteNameToNumber(std::string note){
     i = std::toupper(i);
     std::string s{i};
 
-    int semitones = this->_semitones[ s ];
+    int semitones = this->_semitones.at(s);
 
     int octave = 0;
     size_t last_index = note.find_last_not_of("+-0123456789");

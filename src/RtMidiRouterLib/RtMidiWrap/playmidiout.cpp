@@ -220,7 +220,7 @@ void PlayMidiOut::sendActiveSensing(){
     sendMessage(&sndVector);
 }
 void PlayMidiOut::decrementRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
@@ -231,7 +231,7 @@ void PlayMidiOut::decrementRegisteredParameter(MIDI_REGISTERED_PARAMETER paramet
 }
 
 void PlayMidiOut::incrementRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
@@ -242,7 +242,7 @@ void PlayMidiOut::incrementRegisteredParameter(MIDI_REGISTERED_PARAMETER paramet
 }
 
 void PlayMidiOut::setRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter,  std::vector<BYTE> data, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});

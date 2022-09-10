@@ -59,19 +59,19 @@ public:
 
 
        for (RangeDefinition &rd : rangeDefinitions) {
-           if (floor(i) == rd.fromHBound && i > rd.fromHBound ) {
+           if (floor(i) == (float)rd.fromHBound && i > (float)rd.fromHBound ) {
                i = floor(i);
            }
-           if (i <rd.fromLBound || i  > rd.fromHBound ) {
+           if (i <(float)rd.fromLBound || i  > (float)rd.fromHBound ) {
                continue;
            }
            float pctOfFrom  = 0;
            if (rd.fromHBound-rd.fromLBound > 0) {
-               float f1 = ( i - rd.fromLBound);
+               float f1 = ( i - (float)rd.fromLBound);
                float f2 = (float)(rd.fromHBound-rd.fromLBound);
                pctOfFrom = f1/f2;
            }
-           ret_val  = (int)( pctOfFrom * (rd.toHBound-rd.toLBound)+rd.toLBound);
+           ret_val  = (int)( pctOfFrom * (float)(rd.toHBound-rd.toLBound)+(float)rd.toLBound);
 
        }
 

@@ -47,7 +47,7 @@ void PlayMidiIn::callback( double deltatime, std::vector< BYTE> &message, int po
 
 
 void PlayMidiIn::listener(MidiEvent &m){
-    UNUSED(m);
+    (void)m;
 
     /*
     std::cout<<m.deltatime<<" ";

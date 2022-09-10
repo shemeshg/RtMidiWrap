@@ -33,23 +33,27 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
 }
 
 void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
-{
+{   
+    constexpr int NrpnCc99 = 99;
+    constexpr int NrpnCc98 = 98;
+    constexpr int NrpnCc6 = 6;
+    constexpr int NrpnCc38 = 38;
     if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 99){
+            m.data1 == NrpnCc99){
         NrpnContainer nrpnC;
         nrpnC.nrpnCtrlMsb = m.data2;
         nrpnPack[m.channel] = std::move(nrpnC);
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 98){
+            m.data1 == NrpnCc98){
         nrpnPack[m.channel].nrpnCtrlLsb = m.data2;
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 6){
+            m.data1 == NrpnCc6){
         nrpnPack[m.channel].nrpnDataMsb = m.data2;
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 38){
+            m.data1 == NrpnCc38){
         nrpnPack[m.channel].nrpnDataLsb = m.data2;
 
         m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * 128 + nrpnPack[m.channel].nrpnCtrlLsb;

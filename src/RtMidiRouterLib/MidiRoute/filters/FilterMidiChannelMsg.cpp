@@ -17,7 +17,7 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
         return;
     }
     if (in.msgtype == RtMidiWrap::MIDI_MSG_TYPE::MIDI_CHANNEL_MESSAGES ){
-        std::vector<BYTE> sndVector;
+        std::vector<BYTE> sndVector{};
         for (unsigned i=0; i<in.data.size(); i++)
                 sndVector.push_back(in.data[i]);
 
@@ -28,12 +28,12 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
         }
         int new_command = old_command;
         passedFromFilter = passedFromFilter && fromCommand.isInRange( old_command);
-        if (fromCommand.isInRange( old_command)){new_command = fromCommand.getVal(old_command);}
+        if (fromCommand.isInRange( old_command)){new_command = fromCommand.getVal((float)old_command);}
 
         int old_channel = in.channel;
         int new_channel = old_channel;
         passedFromFilter = passedFromFilter && fromChannel.isInRange( old_channel);
-        if ( fromChannel.isInRange( old_channel) ){new_channel = fromChannel.getVal(old_channel);}
+        if ( fromChannel.isInRange( old_channel) ){new_channel = fromChannel.getVal((float)old_channel);}
 
 
         int old_data1 = in.data[1];
@@ -43,7 +43,7 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
 
         int new_data1 = old_data1;
         passedFromFilter = passedFromFilter && fromData1.isInRange(old_data1);
-        if (fromData1.isInRange(old_data1)){new_data1 = fromData1.getVal(old_data1);}
+        if (fromData1.isInRange(old_data1)){new_data1 = fromData1.getVal((float)old_data1);}
 
 
         int old_data2 = 0;
@@ -52,7 +52,7 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
             old_data2 = in.nrpnData;
             new_data2 = old_data2;
             passedFromFilter = passedFromFilter && fromData2.isInRange(old_data2);
-            if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal(old_data2);}
+            if (fromData2.isInRange(old_data2)){new_data2 = fromData2.getVal((float)old_data2);}
         } else {
             if (2 <= in.data.size()){
                 old_data2 = in.data[2];
@@ -60,10 +60,11 @@ void filterMidiChannelMsg(RtMidiWrap::MidiEvent &in, RangeMap &fromChannel, Rang
                 passedFromFilter = passedFromFilter && fromData2.isInRange(old_data2);
                 if (fromData2.isInRange(old_data2)){
                     if (new_command == nrpnCommand){
-                        float f =  old_data2 + in.cc14bitLsb/127;
+                        constexpr float maxCcVal=127;
+                        float f =  (float)old_data2 + (float)in.cc14bitLsb/maxCcVal;
                         new_data2 = fromData2.getVal(f);
                     } else {
-                        new_data2 = fromData2.getVal(old_data2);
+                        new_data2 = fromData2.getVal((float)old_data2);
                     }
                 }
             }

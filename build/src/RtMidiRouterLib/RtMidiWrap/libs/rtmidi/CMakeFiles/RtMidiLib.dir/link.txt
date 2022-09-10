@@ -1,2 +1,0 @@
-/usr/bin/ar Scr libRtMidiLib.a CMakeFiles/RtMidiLib.dir/RtMidiLib_autogen/mocs_compilation.cpp.o CMakeFiles/RtMidiLib.dir/RtMidi.cpp.o
-/usr/bin/ranlib -no_warning_for_no_symbols -c libRtMidiLib.a

@@ -84,20 +84,20 @@ void MidiInRouter::proccessChainsAndFilters(RtMidiWrap::MidiEvent &m)
                 routeFilterChains->chains[i_chain]->filterMidiChannelMsgAry[i_filters]->doFilter(copyOfM);
             }
             if( copyOfM.eventStatus == RtMidiWrap::EVENT_STATUS::DEFFERED){
-                copyOfM.defferedFilterChainId = i_chain;
-                copyOfM.defferedFilterId = i_filters;
+                copyOfM.defferedFilterChainId = (int)i_chain;
+                copyOfM.defferedFilterId = (int)i_filters;
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::QUANTIZE_SPP){
                     copyOfM.defferedSubmittedAt = songposition.sppNoReset;
                     copyOfM.defferedEventType = RtMidiWrap::DEFFERED_EVENT_TYPE::IN_SPP;
-                    int quantizeDiv = (songposition.spp / copyOfM.defferedTo);
-                    int quantizeAfterPosition = (quantizeDiv + 1) * copyOfM.defferedTo ;
+                    int quantizeDiv = (int)(songposition.spp / copyOfM.defferedTo);
+                    int quantizeAfterPosition = (int)((double)(quantizeDiv + 1) * copyOfM.defferedTo) ;
                     copyOfM.defferedTo = ((double)quantizeAfterPosition - songposition.spp);
                 }
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::QUANTIZE_BAR){
                     copyOfM.defferedSubmittedAt = songposition.getBarPositionNoReset();
                     copyOfM.defferedEventType = RtMidiWrap::DEFFERED_EVENT_TYPE::IN_BAR;
-                    int quantizeDiv = (songposition.getBarPosition() / copyOfM.defferedTo);
-                    int quantizeAfterPosition = (quantizeDiv + 1) * copyOfM.defferedTo ;
+                    int quantizeDiv = (int)(songposition.getBarPosition() / copyOfM.defferedTo);
+                    int quantizeAfterPosition = (int)((double)(quantizeDiv + 1) * copyOfM.defferedTo) ;
                     copyOfM.defferedTo = ((double)quantizeAfterPosition - songposition.getBarPosition());
                 }
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::AT_SPP){

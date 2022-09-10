@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib",
+		"source" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib"
+	}
+}

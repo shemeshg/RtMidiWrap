@@ -1,0 +1,208 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"build" : "src/RtMidiRouterLib",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-src.RtMidiRouterLib-Debug-6da90fcd33a342ae0817.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "src/RtMidiRouterLib",
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"build" : "src/RtMidiRouterLib/RtMidiWrap",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-src.RtMidiRouterLib.RtMidiWrap-Debug-9606a012f54559a9a879.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "src/RtMidiRouterLib/RtMidiWrap",
+					"targetIndexes" : 
+					[
+						6,
+						7
+					]
+				},
+				{
+					"build" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib",
+					"jsonFile" : "directory-src.RtMidiRouterLib.RtMidiWrap.RtMidiLib-Debug-b51cefa13601e33f122c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RtMidiRoute",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						2
+					],
+					"name" : "RtMidiRouterLib",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "RtMidiLib",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "RtMidiLib::@eeb637d42ab08baab758",
+					"jsonFile" : "target-RtMidiLib-Debug-b3995d59299982c1b77f.json",
+					"name" : "RtMidiLib",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "RtMidiLib_autogen::@eeb637d42ab08baab758",
+					"jsonFile" : "target-RtMidiLib_autogen-Debug-388ecd8e030d5cf1cf9a.json",
+					"name" : "RtMidiLib_autogen",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RtMidiRoute::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RtMidiRoute-Debug-f292998c9350ef8c4b80.json",
+					"name" : "RtMidiRoute",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RtMidiRoute_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RtMidiRoute_autogen-Debug-96df20453a8c51f275c4.json",
+					"name" : "RtMidiRoute_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "RtMidiRouterLib::@6ab5c72d440d49485b57",
+					"jsonFile" : "target-RtMidiRouterLib-Debug-a04703586e7ed7c3ae16.json",
+					"name" : "RtMidiRouterLib",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "RtMidiRouterLib_autogen::@6ab5c72d440d49485b57",
+					"jsonFile" : "target-RtMidiRouterLib_autogen-Debug-f2e7692ac9041c25f136.json",
+					"name" : "RtMidiRouterLib_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "RtMidiWrap::@081dd7d00d112b9736e4",
+					"jsonFile" : "target-RtMidiWrap-Debug-1b40f14c6b3f685d30aa.json",
+					"name" : "RtMidiWrap",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "RtMidiWrap_autogen::@081dd7d00d112b9736e4",
+					"jsonFile" : "target-RtMidiWrap_autogen-Debug-e2cd80be6370a2e241fc.json",
+					"name" : "RtMidiWrap_autogen",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build",
+		"source" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

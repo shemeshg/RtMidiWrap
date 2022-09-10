@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRtMidiWrap.a CMakeFiles/RtMidiWrap.dir/RtMidiWrap_autogen/mocs_compilation.cpp.o CMakeFiles/RtMidiWrap.dir/RtMidiWrap.cpp.o CMakeFiles/RtMidiWrap.dir/common.cpp.o CMakeFiles/RtMidiWrap.dir/midievent.cpp.o CMakeFiles/RtMidiWrap.dir/playmidi.cpp.o CMakeFiles/RtMidiWrap.dir/playmidiin.cpp.o CMakeFiles/RtMidiWrap.dir/playmidiout.cpp.o
+/usr/bin/ranlib libRtMidiWrap.a

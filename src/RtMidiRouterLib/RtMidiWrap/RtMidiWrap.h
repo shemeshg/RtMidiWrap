@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-#include "libs/rtmidi/RtMidi.h"
+#include "RtMidi.h"
 
 // Platform-dependent sleep routines.
 #if defined(WIN32)

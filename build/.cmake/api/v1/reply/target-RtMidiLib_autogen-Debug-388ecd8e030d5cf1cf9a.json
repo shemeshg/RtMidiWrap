@@ -1,0 +1,58 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/RtMidiRouterLib/RtMidiWrap/RtMidiLib/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "RtMidiLib_autogen::@eeb637d42ab08baab758",
+	"isGeneratorProvided" : true,
+	"name" : "RtMidiLib_autogen",
+	"paths" : 
+	{
+		"build" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib",
+		"source" : "src/RtMidiRouterLib/RtMidiWrap/RtMidiLib"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/src/RtMidiRouterLib/RtMidiWrap/RtMidiLib/CMakeFiles/RtMidiLib_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/src/RtMidiRouterLib/RtMidiWrap/RtMidiLib/CMakeFiles/RtMidiLib_autogen.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

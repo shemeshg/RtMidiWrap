@@ -1,0 +1,95 @@
+{
+	"BUILD_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidiLib_autogen",
+	"CMAKE_BINARY_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi",
+	"CMAKE_EXECUTABLE" : "/usr/local/Cellar/cmake/3.24.1/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/CMakeLists.txt",
+		"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/CMakeFiles/3.24.1/CMakeCCompiler.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCInformation.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeLanguageInformation.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-C.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang-C.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang.cmake",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidi.h",
+			"MU",
+			"EWIEGA46WW/moc_RtMidi.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidiLib_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidiLib_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi",
+		"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi",
+		"/usr/local/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_GADGET_EXPORT",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/clang++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/local/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidiLib_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 2,
+	"PARSE_CACHE_FILE" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/CMakeFiles/RtMidiLib_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/local/share/qt/libexec/moc",
+	"QT_UIC_EXECUTABLE" : "/usr/local/share/qt/libexec/uic",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 3,
+	"SETTINGS_FILE" : "/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/build/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/CMakeFiles/RtMidiLib_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/Volumes/FAST/develop/MidiRouter/projects/RtMidiWrap/src/RtMidiRouterLib/RtMidiWrap/libs/rtmidi/RtMidi.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

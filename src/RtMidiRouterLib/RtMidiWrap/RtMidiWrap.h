@@ -9,21 +9,28 @@
     #define SLEEP( milliseconds ) std::this_thread::sleep_for(std::chrono::milliseconds((DWORD) milliseconds));
 #else // Unix variants
   #include <unistd.h>
-  #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+  //#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
 #endif
 
 
 namespace RtMidiWrap {
 
-
+namespace {
+    typedef std::map<int, std::string> OpMap;
+    const OpMap apiMap = {
+    {RtMidi::MACOSX_CORE, "OS-X CoreMIDI" },
+    {RtMidi::WINDOWS_MM, "Windows MultiMedia"},
+    {RtMidi::UNIX_JACK, "Jack Client"},
+    {RtMidi::LINUX_ALSA, "Linux ALSA"},
+    {RtMidi::RTMIDI_DUMMY, "RtMidi Dummy"}
+      };
+}
 
 
 //MyClass.h
 class RtMidiWrapClass {
 public:
-      //static defs
-      typedef std::map<int, std::string> OpMap;
-      static OpMap apiMap;
+
 };
 
 
@@ -50,7 +57,8 @@ private:
 };
 
 class MidiIn:public IMidiInOut{
-RtMidiIn  *p_midi_in=0;
+std::unique_ptr<RtMidiIn> p_midi_in;    
+
 public:
     //! User callback function type definition.
     typedef void (*RtMidiCallback)( double timeStamp, std::vector<unsigned char> *message, void *userData );
@@ -67,7 +75,7 @@ public:
 };
 
 class MidiOut:public IMidiInOut{
-    RtMidiOut  *p_midi_out=0;
+    std::unique_ptr<RtMidiOut> p_midi_out;
 public:
     MidiOut();
     ~MidiOut(void);

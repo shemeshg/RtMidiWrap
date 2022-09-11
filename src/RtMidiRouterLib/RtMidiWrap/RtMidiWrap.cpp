@@ -6,14 +6,6 @@
 namespace RtMidiWrap {
 
 
-// static members
-RtMidiWrapClass::OpMap RtMidiWrapClass::apiMap = {
-    {RtMidi::MACOSX_CORE, "OS-X CoreMIDI" },
-    {RtMidi::WINDOWS_MM, "Windows MultiMedia"},
-    {RtMidi::UNIX_JACK, "Jack Client"},
-    {RtMidi::LINUX_ALSA, "Linux ALSA"},
-    {RtMidi::RTMIDI_DUMMY, "RtMidi Dummy"}
-};
 
 // namespace function
 std::vector<std::string> getCompiledApi(){
@@ -23,7 +15,7 @@ std::vector<std::string> getCompiledApi(){
     RtMidi :: getCompiledApi( apis );
 
     for ( unsigned int i=0; i<apis.size(); i++ )
-      _return.push_back( RtMidiWrapClass::apiMap[ apis[i] ]);
+      _return.push_back( apiMap.at( apis[i] ));
 
 
     return _return;
@@ -33,23 +25,21 @@ std::vector<std::string> getCompiledApi(){
 
 
 
-    MidiIn::MidiIn(){
-        p_midi_in = new RtMidiIn();
-        p_midi = p_midi_in;
+    MidiIn::MidiIn(){        
+        p_midi_in = std::make_unique<RtMidiIn>();
+        p_midi = p_midi_in.get();
     };
     MidiIn::~MidiIn(void){
-        delete p_midi_in;
     };
     MidiOut::MidiOut(){
-        p_midi_out = new RtMidiOut();
-        p_midi = p_midi_out;
+        p_midi_out = std::make_unique<RtMidiOut>();
+        p_midi = p_midi_out.get();
     };
     MidiOut::~MidiOut(void){
-        delete p_midi_out;
     };
 
     std::string MidiIn::getCurrentApi(){
-        return RtMidiWrapClass::apiMap[ p_midi_in->getCurrentApi()];
+        return apiMap.at( p_midi_in->getCurrentApi());
     }
 
     void MidiIn::setCallback( RtMidiCallback callback, void *userData  ){
@@ -67,7 +57,7 @@ std::vector<std::string> getCompiledApi(){
 
 
     std::string MidiOut::getCurrentApi(){
-        return RtMidiWrapClass::apiMap[ p_midi_out->getCurrentApi()];
+        return apiMap.at( p_midi_out->getCurrentApi());
     }
 
     void MidiOut::sendMessage(const std::vector<BYTE> *message){
@@ -90,7 +80,7 @@ std::vector<std::string> getCompiledApi(){
         unsigned int nPorts = this->getPortCount();
 
         for ( unsigned i=0; i<nPorts; i++ ) {
-          if ( this->getPortName(i) == portName){return i;}
+          if ( this->getPortName(i) == portName){return (int)i;}
         }
         return -1;
     }
@@ -120,7 +110,7 @@ std::vector<std::string> getCompiledApi(){
 
     void IMidiInOut::openPort( unsigned int portNumber, const std::string &setPortName) {
         p_midi->openPort(portNumber,setPortName);
-        this->openedPortNumber = portNumber;
+        this->openedPortNumber = (int)portNumber;
         this->openedPortName = getPortName(openedPortNumber);
     }
     void IMidiInOut::openPort( const std::string &PortName, const std::string &setPortName) {

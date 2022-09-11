@@ -170,17 +170,20 @@ void PlayMidiOut::sendReset(){
 
 //desired decimal adjustment value in semitones (-65 < x < 64)
 void PlayMidiOut::setMasterTuning(float value, std::vector<BYTE> channels ){
-    if (value <= -65 || value >= 64) {
+    constexpr float minVal=-65, maxVal= 64;
+    if (value <= minVal || value >= maxVal) {
         throw std::runtime_error("The value must be a decimal number larger than -65 and smaller than 64.");
     }
 
-    float coarse = floor(value) + 64;
+    float coarse = floor(value) + maxVal;
     float fine = value - floor(value);
 
     // Calculate MSB and LSB for fine adjustment (14bit resolution)
-    int finei = (int)ceill((fine + 1) / 2 * 16383);
-    int msb = (finei >> 7) & 0x7F;
-    int lsb = finei & 0x7F;
+    constexpr int max14Bit = 16383;
+    int finei = (int)ceill((fine + 1) / 2 * max14Bit);
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (finei >> shift7) & shift127;
+    int lsb = finei & shift127;
 
     std::vector<BYTE> sndVector = {0,0};
     sndVector[0] = MIDI_SYSTEM_MESSAGES::reset;
@@ -206,8 +209,9 @@ void PlayMidiOut::sendTuningRequest(){
 
 void PlayMidiOut::sendSongPosition(int value){
     std::vector<BYTE> sndVector = {0,0,0};
-    int msb = (value >> 7) & 0x7F;
-    int lsb = value & 0x7F;
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (value >> shift7) & shift127;
+    int lsb = value & shift127;
     sndVector[0] = MIDI_SYSTEM_MESSAGES::songposition;
     sndVector[1] = msb;
     sndVector[2] = lsb;
@@ -348,9 +352,11 @@ void PlayMidiOut::setTuningProgram(BYTE value, std::vector<BYTE> channels){
 
 void PlayMidiOut::sendPitchBend(float bend,  std::vector<BYTE> channels){
     if (bend < -1 || bend > 1){throw std::runtime_error("Pitch bend value must be between -1 and 1.");}
-    int nLevel = (int)ceill(( bend + 1) / 2 * 16383);
-    int msb = (nLevel >> 7) & 0x7F;
-    int lsb = nLevel & 0x7F;
+    constexpr int max14Bit = 16383;
+    int nLevel = (int)ceill(( bend + 1) / 2 * max14Bit);
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (nLevel >> shift7) & shift127;
+    int lsb = nLevel & shift127;
     sendPitchBendLsbMsb(lsb,msb,channels);
 }
 

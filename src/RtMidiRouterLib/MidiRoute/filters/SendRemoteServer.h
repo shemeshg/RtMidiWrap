@@ -8,7 +8,7 @@ namespace MidiRoute {
 class SendRemoteServer:public RoutFilter{
     //
 public:
-    ~SendRemoteServer() { };
+
     std::string serverName;
     int serverPort, remoteMidiPortNumber;
     Webchannel::EmitCommand &ec;

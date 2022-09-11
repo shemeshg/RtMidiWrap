@@ -13,7 +13,6 @@ public:
     std::unique_ptr<SignalSlotClass> slotClass;
     std::unique_ptr<SignalClass> signalClass;
 
-    ~SendMidiPort() { };
     SendMidiPort(std::string portName){
         slotClass = std::unique_ptr<SignalSlotClass>(new SignalSlotClass()) ;
         slotClass->openPort(portName);

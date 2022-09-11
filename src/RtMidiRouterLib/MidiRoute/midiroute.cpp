@@ -11,9 +11,9 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
 {
 
     for  (int &cc14item:cc14Bit)
-    {
-
-        int channelCc = m.channel *1000 + m.data1;
+    {        
+        constexpr int bit14ModChannel = 1000;
+        int channelCc = m.channel * bit14ModChannel + m.data1;
         if(m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
                 channelCc == cc14item ){
 
@@ -21,11 +21,12 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
             return;
         }
 
+        constexpr int bit14ModCc = 32;
         if(m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-                channelCc == cc14item + 32){
+                channelCc == cc14item + bit14ModCc){
             m.cc14bitLsb = m.data2;
-            m.data1 = m.data1 - 32;
-            m.data2 = msbForCc14Bit[channelCc - 32];
+            m.data1 = m.data1 - bit14ModCc;
+            m.data2 = msbForCc14Bit[channelCc - bit14ModCc];
             m.data[1] = m.data1;
             m.data[2] = m.data2;
         }
@@ -38,6 +39,7 @@ void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
     constexpr int NrpnCc98 = 98;
     constexpr int NrpnCc6 = 6;
     constexpr int NrpnCc38 = 38;
+    constexpr int max7bit=128;
     if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
             m.data1 == NrpnCc99){
         NrpnContainer nrpnC;
@@ -56,8 +58,8 @@ void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
             m.data1 == NrpnCc38){
         nrpnPack[m.channel].nrpnDataLsb = m.data2;
 
-        m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * 128 + nrpnPack[m.channel].nrpnCtrlLsb;
-        m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * 128 + nrpnPack[m.channel].nrpnDataLsb;
+        m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * max7bit + nrpnPack[m.channel].nrpnCtrlLsb;
+        m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * max7bit + nrpnPack[m.channel].nrpnDataLsb;
     } else {
         m.resetNrpnParams();
     }

@@ -20,10 +20,10 @@ public:
 
 
     void clearRoutingMidiChains(){
-        routeFilterChains->chains.clear();
+        getRouteFilterChains()->chains.clear();
         clearCc14Bit();
         propegateClockToOtherMidiIns.clear();
-        defferedMidiEvents.clear();
+        getDefferedMidiEvents().clear();
     }
 
     WcMidiInListener(EmitCommand &ec): ec{ec}{
@@ -37,8 +37,8 @@ public:
         }
 
         bool found = false;
-        for (unsigned i=0; i<defferedMidiEvents.size(); ++i){
-            auto m = defferedMidiEvents[i].get();
+        for (unsigned i=0; i<getDefferedMidiEvents().size(); ++i){
+            auto m = getDefferedMidiEvents()[i].get();
              if (m->defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::AT_SPP && m->defferedTo <= spp){
                 m->eventStatus = RtMidiWrap::EVENT_STATUS::OK;
                 found = true;
@@ -59,27 +59,27 @@ public:
 
         if (!found){return;}
 
-        for (unsigned i=0; i<defferedMidiEvents.size(); ++i){
-            auto m = defferedMidiEvents[i].get();
+        for (unsigned i=0; i<getDefferedMidiEvents().size(); ++i){
+            auto m = getDefferedMidiEvents()[i].get();
             if (m->eventStatus == RtMidiWrap::EVENT_STATUS::OK){
-                   unsigned int nBytesFilters = (unsigned int)routeFilterChains->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry.size();
+                   unsigned int nBytesFilters = (unsigned int)getRouteFilterChains()->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry.size();
                    for ( unsigned int i_filters= (m->defferedFilterId+1) ; i_filters<nBytesFilters; i_filters++ ){
-                        routeFilterChains->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry[i_filters]->doFilter(*m);
+                        getRouteFilterChains()->chains[m->defferedFilterChainId]->filterMidiChannelMsgAry[i_filters]->doFilter(*m);
                    }
                    m->eventStatus = RtMidiWrap::EVENT_STATUS::DELETED;
             }
         }
 
 
-        defferedMidiEvents.erase(
+        getDefferedMidiEvents().erase(
               std::remove_if(
-                  defferedMidiEvents.begin(),
-                  defferedMidiEvents.end(),
+                  getDefferedMidiEvents().begin(),
+                  getDefferedMidiEvents().end(),
                   [&] (std::unique_ptr<RtMidiWrap::MidiEvent> const& m)
                   {
                       return m->eventStatus  == RtMidiWrap::EVENT_STATUS::DELETED;
                   }),
-              defferedMidiEvents.end()
+              getDefferedMidiEvents().end()
               );
 
 

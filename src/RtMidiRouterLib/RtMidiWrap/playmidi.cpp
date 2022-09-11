@@ -38,10 +38,10 @@ void PlayMidi::setErrorCallback	(RtMidiErrorCallback errorCallback, void * 	user
 
 
 int PlayMidi::openedPortNumber(){
-    return midiinout->openedPortNumber;
+    return midiinout->getOpenedPortNumber();
 }
 std::string PlayMidi::openedPortName(){
-   return midiinout->openedPortName;
+   return midiinout->getOpenedPortName();
 }
 
 BYTE PlayMidi::guessNoteNumber(std::string note){

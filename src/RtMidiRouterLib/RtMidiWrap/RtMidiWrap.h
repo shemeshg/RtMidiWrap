@@ -46,11 +46,23 @@ public:
     bool isPortOpen	(void);
     void openVirtualPort	(const std::string & portName = std::string( "RtMidi Output" )	);
     void setErrorCallback	(RtMidiErrorCallback errorCallback = NULL, void * 	userData = 0 );
-    int openedPortNumber = -1;
-    std::string openedPortName = "";
+
+
+
+    std::string &getOpenedPortName(){
+         return openedPortName;
+    }
+    int &getOpenedPortNumber(){
+        return openedPortNumber;
+    }
 protected:
-    RtMidi  *p_midi=0;
+    void  setP_midi(RtMidi  *p){
+        p_midi=p;
+    };
 private:
+    std::string openedPortName = "";
+    int openedPortNumber = -1;
+    RtMidi  *p_midi=0;
     unsigned int unqIdPortNumber(unsigned int portNumber);
 };
 
@@ -62,7 +74,7 @@ public:
     typedef void (*RtMidiCallback)( double timeStamp, std::vector<unsigned char> *message, void *userData );
 
     MidiIn();
-    ~MidiIn(void);
+
     std::string getCurrentApi();
 
     void setCallback( RtMidiCallback callback, void *userData = 0 );
@@ -76,7 +88,7 @@ class MidiOut:public IMidiInOut{
     std::unique_ptr<RtMidiOut> p_midi_out;
 public:
     MidiOut();
-    ~MidiOut(void);
+
     std::string getCurrentApi();
     void sendMessage(const std::vector< BYTE > *message);
     void sendMessage(const BYTE * 	message,size_t 	size);

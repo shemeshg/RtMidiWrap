@@ -39,7 +39,7 @@ QVariantMap WcMidiIn::getOpenedPorts(){
     QVariantMap qm;
 
     for(auto const& imap: openedMidiInObj){
-        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiin->openedPortName);
+        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiin->getOpenedPortName());
     }
 
     return qm;

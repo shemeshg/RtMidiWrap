@@ -27,16 +27,14 @@ std::vector<std::string> getCompiledApi(){
 
     MidiIn::MidiIn(){        
         p_midi_in = std::make_unique<RtMidiIn>();
-        p_midi = p_midi_in.get();
+        setP_midi( p_midi_in.get());
     };
-    MidiIn::~MidiIn(void){
-    };
+
     MidiOut::MidiOut(){
         p_midi_out = std::make_unique<RtMidiOut>();
-        p_midi = p_midi_out.get();
+        setP_midi(p_midi_out.get()) ;
     };
-    MidiOut::~MidiOut(void){
-    };
+
 
     std::string MidiIn::getCurrentApi(){
         return RtMidiWrapClass::apiMap.at( p_midi_in->getCurrentApi());

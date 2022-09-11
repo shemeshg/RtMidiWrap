@@ -41,7 +41,7 @@ QVariantMap WcMidiOut::getOpenedPorts(){
     QVariantMap qm;
 
     for(auto const& imap: openedMidiOutObj){
-        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiout->openedPortName);
+        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiout->getOpenedPortName());
     }
 
     return qm;

@@ -32,17 +32,12 @@ private:
         }
     }
 
-protected:
     // For general requests like midi list ports
     std::unique_ptr<WcMidiInListener> midiin;
-    //std::unique_ptr<MidiRoute::MidiFilterChain> routeFilterChains = std::unique_ptr<MidiRoute::MidiFilterChain>(new MidiRoute::MidiFilterChain());
-
     // Opened ins
     std::map<int, std::unique_ptr<WcMidiInListener>> openedMidiInObj;
-
     std::map<std::string, std::unique_ptr<CWebChannelClient>> opendRemoteServers;
     std::map<std::string, std::unique_ptr<QWebSocket>> opendRemoteServersSockets;
-
 
 public:
     explicit WcMidiIn(QObject *parent = nullptr);
@@ -55,7 +50,6 @@ public:
 
     }
 
-public:
     Q_INVOKABLE bool msgToServer(const QString &msg);
     Q_INVOKABLE int getPortCount();
     Q_INVOKABLE QString getPortName(int i);

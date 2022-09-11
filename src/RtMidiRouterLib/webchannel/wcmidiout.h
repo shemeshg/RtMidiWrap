@@ -12,16 +12,10 @@ namespace Webchannel {
 class WcMidiOut : public QObject
 {
     Q_OBJECT
-protected:
-    // For general requests like midi list ports
-    std::unique_ptr<RtMidiWrap::MidiOut> midiout;
-    // Opened opnes
-    std::map<int, std::unique_ptr<RtMidiWrap::PlayMidiOut>> openedMidiOutObj;
 
 public:
     explicit WcMidiOut(QObject *parent = nullptr);
 
-public:
     Q_INVOKABLE bool msgToServer(const QString &msg);
     Q_INVOKABLE int getPortCount();
     Q_INVOKABLE QString getPortName(int i);
@@ -51,7 +45,7 @@ public:
     Q_INVOKABLE void setNonRegisteredParameterInt( int portNumber,int parameter,int data,QStringList channels);
     Q_INVOKABLE void sendMessage( int portNumber,QStringList message);
     Q_INVOKABLE void restart(){
-        midiout.reset(new RtMidiWrap::MidiOut());
+        midiout = std::make_unique<RtMidiWrap::MidiOut>();
         openedMidiOutObj.clear();
     }
 
@@ -102,6 +96,11 @@ public:
     }
 
 private:
+    // For general requests like midi list ports
+    std::unique_ptr<RtMidiWrap::MidiOut> midiout;
+    // Opened opnes
+    std::map<int, std::unique_ptr<RtMidiWrap::PlayMidiOut>> openedMidiOutObj;
+
     std::vector<BYTE> qStringListToVectorByte(QStringList &channels){
         std::vector<BYTE>  stdchannels;
         foreach( QString str, channels) {

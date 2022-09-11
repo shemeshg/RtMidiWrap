@@ -16,7 +16,7 @@ bool WcMidiOut::msgToServer(const QString &msg){
 
 int WcMidiOut::getPortCount(){
 
-    return midiout->getPortCount();
+    return (int)midiout->getPortCount();
 };
 
 QString WcMidiOut::getPortName(int i){
@@ -29,7 +29,7 @@ int WcMidiOut::getPortNumber(const QString &s){
 
 QVariantMap WcMidiOut::getPorts(){
     QVariantMap qm;
-    int nPorts = midiout->getPortCount();
+    int nPorts = (int)midiout->getPortCount();
 
     for ( int i=0; i<nPorts; i++ ) {
       qm[QString::number(i)] = QString::fromStdString( midiout->getPortName(i));

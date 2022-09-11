@@ -37,18 +37,18 @@ void PlayMidiOut::sendChannelMode(MIDI_CHANNEL_MODE_MESSAGES command, BYTE value
 }
 
 void PlayMidiOut::_selectRegisteredParameter(std::vector<BYTE> parameterAry, std::vector<BYTE> channel){
-    sendControlChange(0x65, parameterAry[0], channel);
-    sendControlChange(0x64, parameterAry[1], channel);
+    sendControlChange(0x65, parameterAry[0], channel);//NOLINT
+    sendControlChange(0x64, parameterAry[1], channel);//NOLINT
 }
 
 void PlayMidiOut::_selectNonRegisteredParameter(std::vector<BYTE> parameterAry, std::vector<BYTE> channel){
-    sendControlChange(0x63, parameterAry[0], channel);
-    sendControlChange(0x62, parameterAry[1], channel);
+    sendControlChange(0x63, parameterAry[0], channel);//NOLINT
+    sendControlChange(0x62, parameterAry[1], channel);//NOLINT
 }
 
 void PlayMidiOut::_deselectRegisteredParameter( std::vector<BYTE> channels){
-    sendControlChange(0x65, 0x7F, channels);
-    sendControlChange(0x64, 0x7F, channels);
+    sendControlChange(0x65, 0x7F, channels);//NOLINT
+    sendControlChange(0x64, 0x7F, channels);//NOLINT
 }
 
 void PlayMidiOut::sendControlChange(BYTE controller, BYTE value, std::vector<BYTE> channels){
@@ -73,23 +73,23 @@ void PlayMidiOut::setNonRegisteredParameter( std::vector<BYTE> parameter, std::v
 
 void PlayMidiOut::setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels){
     std::vector<BYTE> p;
-    p.push_back(parameter >> 7); //msb
-    p.push_back(parameter & 0x7F); //lsb
+    p.push_back(parameter >> 7); //msb //NOLINT
+    p.push_back(parameter & 0x7F); //lsb //NOLINT
     std::vector<BYTE> d;
-    d.push_back(data >> 7);
-    d.push_back(data & 0x7F);
+    d.push_back(data >> 7);//NOLINT
+    d.push_back(data & 0x7F);//NOLINT
     setNonRegisteredParameter(p,d,channels);
 }
 
 void PlayMidiOut::_setCurrentRegisteredParameter( std::vector<BYTE> data, std::vector<BYTE> channels){
 
     for (auto &channel : channels){
-        sendControlChange(0x06, data[0], {channel});
+        sendControlChange(0x06, data[0], {channel});//NOLINT
     }
 
     //if(data[1] >= 0 && data[1] <= 127) { //this is always true because of data type
         for (auto &channel : channels){
-            sendControlChange(0x26, data[1], {channel});
+            sendControlChange(0x26, data[1], {channel});//NOLINT
         }
     //}
 }
@@ -228,7 +228,7 @@ void PlayMidiOut::decrementRegisteredParameter(MIDI_REGISTERED_PARAMETER paramet
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
-        sendControlChange(0x61, 0, {channel});
+        sendControlChange(0x61, 0, {channel});//NOLINT
         _deselectRegisteredParameter({channel});
 
     }
@@ -239,7 +239,7 @@ void PlayMidiOut::incrementRegisteredParameter(MIDI_REGISTERED_PARAMETER paramet
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
-        sendControlChange(0x60, 0, {channel});
+        sendControlChange(0x60, 0, {channel});//NOLINT
         _deselectRegisteredParameter({channel});
 
     }

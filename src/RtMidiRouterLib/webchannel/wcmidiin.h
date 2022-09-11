@@ -42,9 +42,9 @@ private:
 public:
     explicit WcMidiIn(QObject *parent = nullptr);
 
-    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto, std::string userdata);
+    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto, std::string userdata) override;
 
-    void propegateClock(int portNumber, double barPosition, double spp, double barPositionNoReset, double sppNoReset){
+    void propegateClock(int portNumber, double barPosition, double spp, double barPositionNoReset, double sppNoReset) override{
 
         openedMidiInObj[portNumber]->clockAction(barPosition, spp, barPositionNoReset, sppNoReset);
 

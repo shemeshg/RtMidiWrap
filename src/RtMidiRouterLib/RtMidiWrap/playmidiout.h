@@ -26,7 +26,7 @@ public:
     void playNote( std::vector<std::string> notes, std::vector<BYTE> channels = channelAll, BYTE velocity = initVelocity);
     void stopNote( std::vector<std::string> notes, std::vector<BYTE> channels = channelAll, BYTE velocity = initVelocity);
     void sendKeyAftertouch(std::vector<std::string> notes, std::vector<BYTE> channels = channelAll, BYTE pressure = initVelocity );
-    void sendChannelAftertouch(BYTE pressure = 64, std::vector<BYTE> channels = channelAll);
+    void sendChannelAftertouch(BYTE pressure = initVelocity, std::vector<BYTE> channels = channelAll);
     void sendPitchBend(float bend,  std::vector<BYTE> channels = channelAll);
     void sendPitchBendLsbMsb(BYTE lsb, BYTE msb,  std::vector<BYTE> channels = channelAll);
     void decrementRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter, std::vector<BYTE> channels = channelAll);

@@ -28,7 +28,7 @@ void MainClass::parseParams()
 {
 
     QSettings settings("shemeshg", "MidiRouter");
-    port = settings.value("server/port", 12345).toInt();
+    port = settings.value("server/port", 12345).toInt(); //NOLINT
     cout<<"Server port is "<<port<< "\n";
 
     QCommandLineParser parser;

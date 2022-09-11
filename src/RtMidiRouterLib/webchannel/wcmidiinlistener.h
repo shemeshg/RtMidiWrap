@@ -1,7 +1,6 @@
 #pragma once
 #include "MidiRoute/midiroute.h"
 #include "EmitCommand.h"
-#include "WcRouteFilterChains.h"
 
 namespace Webchannel {
 
@@ -14,9 +13,14 @@ public:
 
     std::vector<int> propegateClockToOtherMidiIns {};
 
-    ~WcMidiInListener(){
+    ~WcMidiInListener() override{
         clearRoutingMidiChains();
     }
+
+    WcMidiInListener(const WcMidiInListener&) = delete;
+    WcMidiInListener& operator=(const WcMidiInListener&)= delete;
+    WcMidiInListener(WcMidiInListener&&) = delete;
+    WcMidiInListener& operator=(WcMidiInListener&&) = delete;
 
 
     void clearRoutingMidiChains(){
@@ -31,7 +35,7 @@ public:
         //ec.routeFilterChains->chains[i]->addSendMidiPort("IAC Driver Bus 1");
     };
 
-    void clockAction(double barPosition, double spp, double barPositionNoReset, double sppNoReset){
+    void clockAction(double barPosition, double spp, double barPositionNoReset, double sppNoReset) override{
         for (auto &channelId : propegateClockToOtherMidiIns){
             ec.propegateClock(channelId, barPosition, spp, barPositionNoReset, sppNoReset);
         }

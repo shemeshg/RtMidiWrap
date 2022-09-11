@@ -90,8 +90,7 @@ public:
     }
 
     Q_INVOKABLE void restart(){
-        midiin.reset(new WcMidiInListener(*this));
-
+        midiin.reset(new WcMidiInListener(*this));//NOLINT
         openedMidiInObj.clear();
         opendRemoteServers.clear();
         opendRemoteServersSockets.clear();

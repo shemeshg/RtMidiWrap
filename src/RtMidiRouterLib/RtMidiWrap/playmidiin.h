@@ -16,6 +16,11 @@ public:
 
     PlayMidiIn();
     virtual ~PlayMidiIn() = default;
+    PlayMidiIn(const PlayMidiIn&) = delete;
+    PlayMidiIn& operator=(const PlayMidiIn&)= delete;
+    PlayMidiIn(PlayMidiIn&&) = delete;
+    PlayMidiIn& operator=(PlayMidiIn&&) = delete;
+
     SongPosition songposition;
 
     virtual void callback( double deltatime, std::vector< BYTE> &message,int portNumber, std::string portName);

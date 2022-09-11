@@ -20,7 +20,7 @@ void VirtualInOut::addVirtualInOutPort(std::string portname){
 
 }
 
-std::vector<std::unique_ptr<VirtualInOut>> g;
+std::vector<std::unique_ptr<VirtualInOut>> g; //NOLINT
 
 void addVirtualInOutPort(std::string portname){
      std::unique_ptr<VirtualInOut> v = std::unique_ptr<VirtualInOut>(new VirtualInOut());

@@ -22,9 +22,7 @@ class WcMidiIn : public QObject,EmitCommand
 private:
     void _setRangeMap(MidiRoute::RangeMap &range, QJsonArray &json){
         range.clear();
-
-
-        for(QJsonValue v: json){
+        for(const QJsonValue &v: json){
             QJsonArray j =  v.toArray();
             std::vector<int> intAry;
             for(auto i = j.begin(); i != j.end(); i++) {

@@ -15,7 +15,7 @@ std::vector<std::string> getCompiledApi(){
     RtMidi :: getCompiledApi( apis );
 
     for ( unsigned int i=0; i<apis.size(); i++ )
-      _return.push_back( apiMap.at( apis[i] ));
+      _return.push_back( RtMidiWrapClass::apiMap.at( apis[i] ));
 
 
     return _return;
@@ -39,7 +39,7 @@ std::vector<std::string> getCompiledApi(){
     };
 
     std::string MidiIn::getCurrentApi(){
-        return apiMap.at( p_midi_in->getCurrentApi());
+        return RtMidiWrapClass::apiMap.at( p_midi_in->getCurrentApi());
     }
 
     void MidiIn::setCallback( RtMidiCallback callback, void *userData  ){
@@ -57,7 +57,7 @@ std::vector<std::string> getCompiledApi(){
 
 
     std::string MidiOut::getCurrentApi(){
-        return apiMap.at( p_midi_out->getCurrentApi());
+        return RtMidiWrapClass::apiMap.at( p_midi_out->getCurrentApi());
     }
 
     void MidiOut::sendMessage(const std::vector<BYTE> *message){

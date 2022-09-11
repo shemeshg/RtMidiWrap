@@ -15,22 +15,20 @@
 
 namespace RtMidiWrap {
 
-namespace {
-    typedef std::map<int, std::string> OpMap;
-    const OpMap apiMap = {
+
+
+
+
+//MyClass.h
+class RtMidiWrapClass {
+public:
+    static inline const  std::map<int, std::string>  apiMap = {
     {RtMidi::MACOSX_CORE, "OS-X CoreMIDI" },
     {RtMidi::WINDOWS_MM, "Windows MultiMedia"},
     {RtMidi::UNIX_JACK, "Jack Client"},
     {RtMidi::LINUX_ALSA, "Linux ALSA"},
     {RtMidi::RTMIDI_DUMMY, "RtMidi Dummy"}
       };
-}
-
-
-//MyClass.h
-class RtMidiWrapClass {
-public:
-
 };
 
 

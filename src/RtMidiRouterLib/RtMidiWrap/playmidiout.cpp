@@ -37,18 +37,18 @@ void PlayMidiOut::sendChannelMode(MIDI_CHANNEL_MODE_MESSAGES command, BYTE value
 }
 
 void PlayMidiOut::_selectRegisteredParameter(std::vector<BYTE> parameterAry, std::vector<BYTE> channel){
-    sendControlChange(0x65, parameterAry[0], channel);
-    sendControlChange(0x64, parameterAry[1], channel);
+    sendControlChange(0x65, parameterAry[0], channel);//NOLINT
+    sendControlChange(0x64, parameterAry[1], channel);//NOLINT
 }
 
 void PlayMidiOut::_selectNonRegisteredParameter(std::vector<BYTE> parameterAry, std::vector<BYTE> channel){
-    sendControlChange(0x63, parameterAry[0], channel);
-    sendControlChange(0x62, parameterAry[1], channel);
+    sendControlChange(0x63, parameterAry[0], channel);//NOLINT
+    sendControlChange(0x62, parameterAry[1], channel);//NOLINT
 }
 
 void PlayMidiOut::_deselectRegisteredParameter( std::vector<BYTE> channels){
-    sendControlChange(0x65, 0x7F, channels);
-    sendControlChange(0x64, 0x7F, channels);
+    sendControlChange(0x65, 0x7F, channels);//NOLINT
+    sendControlChange(0x64, 0x7F, channels);//NOLINT
 }
 
 void PlayMidiOut::sendControlChange(BYTE controller, BYTE value, std::vector<BYTE> channels){
@@ -73,23 +73,23 @@ void PlayMidiOut::setNonRegisteredParameter( std::vector<BYTE> parameter, std::v
 
 void PlayMidiOut::setNonRegisteredParameterInt( int parameter, int data, std::vector<BYTE> channels){
     std::vector<BYTE> p;
-    p.push_back(parameter >> 7); //msb
-    p.push_back(parameter & 0x7F); //lsb
+    p.push_back(parameter >> 7); //msb //NOLINT
+    p.push_back(parameter & 0x7F); //lsb //NOLINT
     std::vector<BYTE> d;
-    d.push_back(data >> 7);
-    d.push_back(data & 0x7F);
+    d.push_back(data >> 7);//NOLINT
+    d.push_back(data & 0x7F);//NOLINT
     setNonRegisteredParameter(p,d,channels);
 }
 
 void PlayMidiOut::_setCurrentRegisteredParameter( std::vector<BYTE> data, std::vector<BYTE> channels){
 
     for (auto &channel : channels){
-        sendControlChange(0x06, data[0], {channel});
+        sendControlChange(0x06, data[0], {channel});//NOLINT
     }
 
     //if(data[1] >= 0 && data[1] <= 127) { //this is always true because of data type
         for (auto &channel : channels){
-            sendControlChange(0x26, data[1], {channel});
+            sendControlChange(0x26, data[1], {channel});//NOLINT
         }
     //}
 }
@@ -170,17 +170,20 @@ void PlayMidiOut::sendReset(){
 
 //desired decimal adjustment value in semitones (-65 < x < 64)
 void PlayMidiOut::setMasterTuning(float value, std::vector<BYTE> channels ){
-    if (value <= -65 || value >= 64) {
+    constexpr float minVal=-65, maxVal= 64;
+    if (value <= minVal || value >= maxVal) {
         throw std::runtime_error("The value must be a decimal number larger than -65 and smaller than 64.");
     }
 
-    float coarse = floor(value) + 64;
+    float coarse = floor(value) + maxVal;
     float fine = value - floor(value);
 
     // Calculate MSB and LSB for fine adjustment (14bit resolution)
-    int finei = (int)ceill((fine + 1) / 2 * 16383);
-    int msb = (finei >> 7) & 0x7F;
-    int lsb = finei & 0x7F;
+    constexpr int max14Bit = 16383;
+    int finei = (int)ceill((fine + 1) / 2 * max14Bit);
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (finei >> shift7) & shift127;
+    int lsb = finei & shift127;
 
     std::vector<BYTE> sndVector = {0,0};
     sndVector[0] = MIDI_SYSTEM_MESSAGES::reset;
@@ -206,8 +209,9 @@ void PlayMidiOut::sendTuningRequest(){
 
 void PlayMidiOut::sendSongPosition(int value){
     std::vector<BYTE> sndVector = {0,0,0};
-    int msb = (value >> 7) & 0x7F;
-    int lsb = value & 0x7F;
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (value >> shift7) & shift127;
+    int lsb = value & shift127;
     sndVector[0] = MIDI_SYSTEM_MESSAGES::songposition;
     sndVector[1] = msb;
     sndVector[2] = lsb;
@@ -220,29 +224,29 @@ void PlayMidiOut::sendActiveSensing(){
     sendMessage(&sndVector);
 }
 void PlayMidiOut::decrementRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
-        sendControlChange(0x61, 0, {channel});
+        sendControlChange(0x61, 0, {channel});//NOLINT
         _deselectRegisteredParameter({channel});
 
     }
 }
 
 void PlayMidiOut::incrementRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
-        sendControlChange(0x60, 0, {channel});
+        sendControlChange(0x60, 0, {channel});//NOLINT
         _deselectRegisteredParameter({channel});
 
     }
 }
 
 void PlayMidiOut::setRegisteredParameter(MIDI_REGISTERED_PARAMETER parameter,  std::vector<BYTE> data, std::vector<BYTE> channels){
-    std::vector<BYTE> parameterAry = midiRegisteredParameter[parameter];
+    std::vector<BYTE> parameterAry = midiRegisteredParameter.at(parameter);
     for (auto &channel : channels){
 
         _selectRegisteredParameter(parameterAry, {channel});
@@ -348,9 +352,11 @@ void PlayMidiOut::setTuningProgram(BYTE value, std::vector<BYTE> channels){
 
 void PlayMidiOut::sendPitchBend(float bend,  std::vector<BYTE> channels){
     if (bend < -1 || bend > 1){throw std::runtime_error("Pitch bend value must be between -1 and 1.");}
-    int nLevel = (int)ceill(( bend + 1) / 2 * 16383);
-    int msb = (nLevel >> 7) & 0x7F;
-    int lsb = nLevel & 0x7F;
+    constexpr int max14Bit = 16383;
+    int nLevel = (int)ceill(( bend + 1) / 2 * max14Bit);
+    constexpr int shift7 = 7, shift127=0x7F;
+    int msb = (nLevel >> shift7) & shift127;
+    int lsb = nLevel & shift127;
     sendPitchBendLsbMsb(lsb,msb,channels);
 }
 

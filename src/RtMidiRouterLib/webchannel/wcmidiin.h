@@ -22,9 +22,7 @@ class WcMidiIn : public QObject,EmitCommand
 private:
     void _setRangeMap(MidiRoute::RangeMap &range, QJsonArray &json){
         range.clear();
-
-
-        for(QJsonValue v: json){
+        for(const QJsonValue &v: json){
             QJsonArray j =  v.toArray();
             std::vector<int> intAry;
             for(auto i = j.begin(); i != j.end(); i++) {
@@ -34,30 +32,24 @@ private:
         }
     }
 
-protected:
     // For general requests like midi list ports
     std::unique_ptr<WcMidiInListener> midiin;
-    //std::unique_ptr<MidiRoute::MidiFilterChain> routeFilterChains = std::unique_ptr<MidiRoute::MidiFilterChain>(new MidiRoute::MidiFilterChain());
-
     // Opened ins
     std::map<int, std::unique_ptr<WcMidiInListener>> openedMidiInObj;
-
     std::map<std::string, std::unique_ptr<CWebChannelClient>> opendRemoteServers;
     std::map<std::string, std::unique_ptr<QWebSocket>> opendRemoteServersSockets;
-
 
 public:
     explicit WcMidiIn(QObject *parent = nullptr);
 
-    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto, std::string userdata);
+    void msgSend(RtMidiWrap::MidiEvent &m,LOG_TO logto, std::string userdata) override;
 
-    void propegateClock(int portNumber, double barPosition, double spp, double barPositionNoReset, double sppNoReset){
+    void propegateClock(int portNumber, double barPosition, double spp, double barPositionNoReset, double sppNoReset) override{
 
         openedMidiInObj[portNumber]->clockAction(barPosition, spp, barPositionNoReset, sppNoReset);
 
     }
 
-public:
     Q_INVOKABLE bool msgToServer(const QString &msg);
     Q_INVOKABLE int getPortCount();
     Q_INVOKABLE QString getPortName(int i);
@@ -98,8 +90,7 @@ public:
     }
 
     Q_INVOKABLE void restart(){
-        midiin.reset(new WcMidiInListener(*this));
-
+        midiin.reset(new WcMidiInListener(*this));//NOLINT
         openedMidiInObj.clear();
         opendRemoteServers.clear();
         opendRemoteServersSockets.clear();
@@ -110,30 +101,30 @@ public:
     }
 
     Q_INVOKABLE int routingMidiChainsAaddChain(int portNumber){
-        return openedMidiInObj[portNumber]->routeFilterChains->addChain();
+        return openedMidiInObj[portNumber]->getRouteFilterChains()->addChain();
     }
     Q_INVOKABLE int routingActionAddSendPortByName(int portNumber, int chainId, QString portName){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendMidiPort(portName.toStdString());
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addSendMidiPort(portName.toStdString());
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
     }
     Q_INVOKABLE int routingActionAddSendPortByNumber(int portNumber, int chainId, int portNumberOut){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendMidiPort(portNumberOut);
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addSendMidiPort(portNumberOut);
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
     }
 
     Q_INVOKABLE int routingActionAddSendRemoteServer(int portNumber, int chainId, QString serverName, int serverPort, int remoteMidiPortNumber){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addSendRemoteServer(*this, serverName.toStdString(), serverPort, remoteMidiPortNumber);
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addSendRemoteServer(*this, serverName.toStdString(), serverPort, remoteMidiPortNumber);
 
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
     }
 
     Q_INVOKABLE int routingActionAddLogData(int portNumber, int chainId, int logto, QString userdata){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addLogData(*this,(LOG_TO)logto, userdata.toStdString());
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addLogData(*this,(LOG_TO)logto, userdata.toStdString());
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
     }
     Q_INVOKABLE int routingActionAddDeferedEvent(int portNumber, int chainId, int defferedEventType,double defferedTo){
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addDeferedEvent((RtMidiWrap::DEFFERED_EVENT_TYPE)defferedEventType,defferedTo );
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addDeferedEvent((RtMidiWrap::DEFFERED_EVENT_TYPE)defferedEventType,defferedTo );
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
     }
 
 
@@ -149,10 +140,10 @@ public:
         MidiRoute::RangeMap _data2;
         _setRangeMap(_data2, data2);
 
-        openedMidiInObj[portNumber]->routeFilterChains->chains[chainId]->addFilterMidiChannelMsg(_channels,_eventTypes, _data1, _data2,
+        openedMidiInObj[portNumber]->getRouteFilterChains()->chains[chainId]->addFilterMidiChannelMsg(_channels,_eventTypes, _data1, _data2,
                                                                                                 (MidiRoute::MIDI_FILTER_ACTION_IF_NOT)midiFilterActionIfNot );
 
-        return (int)openedMidiInObj[portNumber]->routeFilterChains->chains.size() - 1;
+        return (int)openedMidiInObj[portNumber]->getRouteFilterChains()->chains.size() - 1;
 
     }
 

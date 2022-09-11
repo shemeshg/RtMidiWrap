@@ -28,10 +28,12 @@ public:
 
     void tick(){
         clock++;
-        spp = spp + (timeSigDivBy/4.0) * ((timeSig * timeSigDivBy)/timeSig )/24.0;
-        sppNoReset = spp + (timeSigDivBy/4.0) * ((timeSig * timeSigDivBy)/timeSig )/24.0;
+        constexpr double bitPerBar = 4;
+        constexpr double sppPerBar = 24;
+        spp = spp + (timeSigDivBy/bitPerBar) * ((timeSig * timeSigDivBy)/timeSig )/sppPerBar;
+        sppNoReset = spp + (timeSigDivBy/bitPerBar) * ((timeSig * timeSigDivBy)/timeSig )/sppPerBar;
         int g= (int)clock;
-        if (g %24 ==0){clock=0;}
+        if (g % (int)sppPerBar ==0){clock=0;}
 
         return;
 
@@ -41,8 +43,9 @@ public:
 
         int sppTotal = 0;
 
+        constexpr int sppEvery7 = 7;
         for ( unsigned int i=1; i<nBytes; i++ )
-          sppTotal = sppTotal + ( (int)message.at(i) << ( 7 * (i -1) ) );
+          sppTotal = sppTotal + ( (int)message.at(i) << ( sppEvery7 * (i -1) ) );
         int ipow = (int)(log2(timeSigDivBy) - 2);
 
         spp = sppTotal * ( pow (4, ipow));

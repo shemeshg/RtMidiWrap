@@ -38,16 +38,17 @@ void PlayMidi::setErrorCallback	(RtMidiErrorCallback errorCallback, void * 	user
 
 
 int PlayMidi::openedPortNumber(){
-    return midiinout->openedPortNumber;
+    return midiinout->getOpenedPortNumber();
 }
 std::string PlayMidi::openedPortName(){
-   return midiinout->openedPortName;
+   return midiinout->getOpenedPortName();
 }
 
 BYTE PlayMidi::guessNoteNumber(std::string note){
     if (is_number(note)) {
         int i=std::stoi(note);
-        if (i>127 || i<0 ){throw std::runtime_error("error guessNoteNumber");}
+        constexpr int maxNoteNumber = 127;
+        if (i>maxNoteNumber || i<0 ){throw std::runtime_error("error guessNoteNumber");}
         return std::stoi(note);
     }
 
@@ -57,7 +58,8 @@ BYTE PlayMidi::guessNoteNumber(std::string note){
 
 
 std::string PlayMidi::noteNumberToName(BYTE num){
-    return _notes[num % 12] + std::to_string( getOctave(num));
+    constexpr int notesPerOctave = 12;
+    return _notes[num % notesPerOctave] + std::to_string( getOctave(num));
 
 }
 
@@ -68,22 +70,23 @@ BYTE PlayMidi::noteNameToNumber(std::string note){
     }
 
     char i = note[0];
-    i = std::toupper(i);
+    i = (char)std::toupper(i);
     std::string s{i};
 
-    int semitones = this->_semitones[ s ];
+    int semitones = this->_semitones.at(s);
 
     int octave = 0;
     size_t last_index = note.find_last_not_of("+-0123456789");
     octave = std::stoi( note.substr(last_index + 1) );
 
 
-
-    int result = (int)(((octave + 1 - floor(octaveOffset)) * 12) + semitones);
+    constexpr int notesPerOctave = 12;
+    int result = (int)(((octave + 1 - floor(octaveOffset)) * notesPerOctave) + semitones);
 
     if (note.find("#") != std::string::npos){result++;}
     if (note.find("b") != std::string::npos){result--;}
-    if (result < 0 || result > 127) {
+    constexpr int maxNoteNumber = 127;
+    if (result < 0 || result > maxNoteNumber) {
         throw std::runtime_error("Invalid note name or note outside valid range.");
     }
 

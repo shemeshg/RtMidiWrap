@@ -14,8 +14,13 @@ enum MIDI_FILTER_ACTION_IF_NOT {
 class RoutFilter:public RtMidiWrap::CommonStatic{
 public:
     virtual void doFilter(RtMidiWrap::MidiEvent &in)=0;
+    RoutFilter(){};
+    virtual ~RoutFilter()=default;
+    RoutFilter(const RoutFilter&) = delete;
+    RoutFilter& operator=(const RoutFilter&)= delete;
+    RoutFilter(RoutFilter&&) = delete;
+    RoutFilter& operator=(RoutFilter&&) = delete;
 
-    virtual ~RoutFilter() = default;
 };
 
 

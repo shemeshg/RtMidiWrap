@@ -11,11 +11,13 @@ MidiEvent::MidiEvent(double deltatime, std::vector< BYTE> &data,
 
 void MidiEvent::updateProperties(){
     if (eventStatus == EVENT_STATUS::DELETED) {return;}
-    if (data[0]<240){
+    constexpr int sysMsgLowBound=240;
+    if (data[0]<sysMsgLowBound){
         msgtype = MIDI_MSG_TYPE::MIDI_CHANNEL_MESSAGES;
 
         int l_command = data[0] >> 4;
-        int i_channel = (data[0] & 0xf) + 1;
+        constexpr int channelMask = 0xf;
+        int i_channel = (data[0] & channelMask) + 1;
         int l_data1 =0, l_data2 =0;
         if (data.size() >1){l_data1 = data[1];}
         if (data.size() >2){l_data2 = data[2];}

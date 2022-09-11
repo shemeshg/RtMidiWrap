@@ -18,7 +18,6 @@ class FilterMidiChannelMsg:public RoutFilter{
 
     MIDI_FILTER_ACTION_IF_NOT deleteIfNot;
 public:
-    ~FilterMidiChannelMsg() { };
 
     FilterMidiChannelMsg(RangeMap fromChannel, RangeMap fromCommand, RangeMap fromData1, RangeMap fromData2,
                          MIDI_FILTER_ACTION_IF_NOT deleteIfNot):

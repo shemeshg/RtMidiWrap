@@ -11,9 +11,9 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
 {
 
     for  (int &cc14item:cc14Bit)
-    {
-
-        int channelCc = m.channel *1000 + m.data1;
+    {        
+        constexpr int bit14ModChannel = 1000;
+        int channelCc = m.channel * bit14ModChannel + m.data1;
         if(m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
                 channelCc == cc14item ){
 
@@ -21,11 +21,12 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
             return;
         }
 
+        constexpr int bit14ModCc = 32;
         if(m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-                channelCc == cc14item + 32){
+                channelCc == cc14item + bit14ModCc){
             m.cc14bitLsb = m.data2;
-            m.data1 = m.data1 - 32;
-            m.data2 = msbForCc14Bit[channelCc - 32];
+            m.data1 = m.data1 - bit14ModCc;
+            m.data2 = msbForCc14Bit[channelCc - bit14ModCc];
             m.data[1] = m.data1;
             m.data[2] = m.data2;
         }
@@ -33,27 +34,32 @@ void MidiInRouter::proccess14bitCc(RtMidiWrap::MidiEvent &m)
 }
 
 void MidiInRouter::proccessNrpn(RtMidiWrap::MidiEvent &m)
-{
+{   
+    constexpr int NrpnCc99 = 99;
+    constexpr int NrpnCc98 = 98;
+    constexpr int NrpnCc6 = 6;
+    constexpr int NrpnCc38 = 38;
+    constexpr int max7bit=128;
     if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 99){
+            m.data1 == NrpnCc99){
         NrpnContainer nrpnC;
         nrpnC.nrpnCtrlMsb = m.data2;
         nrpnPack[m.channel] = std::move(nrpnC);
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 98){
+            m.data1 == NrpnCc98){
         nrpnPack[m.channel].nrpnCtrlLsb = m.data2;
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 6){
+            m.data1 == NrpnCc6){
         nrpnPack[m.channel].nrpnDataMsb = m.data2;
     }
     else if (m.command == RtMidiWrap::CommonStatic::MIDI_CHANNEL_MESSAGES::controlchange &&
-            m.data1 == 38){
+            m.data1 == NrpnCc38){
         nrpnPack[m.channel].nrpnDataLsb = m.data2;
 
-        m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * 128 + nrpnPack[m.channel].nrpnCtrlLsb;
-        m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * 128 + nrpnPack[m.channel].nrpnDataLsb;
+        m.nrpnControl = nrpnPack[m.channel].nrpnCtrlMsb * max7bit + nrpnPack[m.channel].nrpnCtrlLsb;
+        m.nrpnData = nrpnPack[m.channel].nrpnDataMsb * max7bit + nrpnPack[m.channel].nrpnDataLsb;
     } else {
         m.resetNrpnParams();
     }
@@ -80,20 +86,20 @@ void MidiInRouter::proccessChainsAndFilters(RtMidiWrap::MidiEvent &m)
                 routeFilterChains->chains[i_chain]->filterMidiChannelMsgAry[i_filters]->doFilter(copyOfM);
             }
             if( copyOfM.eventStatus == RtMidiWrap::EVENT_STATUS::DEFFERED){
-                copyOfM.defferedFilterChainId = i_chain;
-                copyOfM.defferedFilterId = i_filters;
+                copyOfM.defferedFilterChainId = (int)i_chain;
+                copyOfM.defferedFilterId = (int)i_filters;
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::QUANTIZE_SPP){
                     copyOfM.defferedSubmittedAt = songposition.sppNoReset;
                     copyOfM.defferedEventType = RtMidiWrap::DEFFERED_EVENT_TYPE::IN_SPP;
-                    int quantizeDiv = (songposition.spp / copyOfM.defferedTo);
-                    int quantizeAfterPosition = (quantizeDiv + 1) * copyOfM.defferedTo ;
+                    int quantizeDiv = (int)(songposition.spp / copyOfM.defferedTo);
+                    int quantizeAfterPosition = (int)((double)(quantizeDiv + 1) * copyOfM.defferedTo) ;
                     copyOfM.defferedTo = ((double)quantizeAfterPosition - songposition.spp);
                 }
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::QUANTIZE_BAR){
                     copyOfM.defferedSubmittedAt = songposition.getBarPositionNoReset();
                     copyOfM.defferedEventType = RtMidiWrap::DEFFERED_EVENT_TYPE::IN_BAR;
-                    int quantizeDiv = (songposition.getBarPosition() / copyOfM.defferedTo);
-                    int quantizeAfterPosition = (quantizeDiv + 1) * copyOfM.defferedTo ;
+                    int quantizeDiv = (int)(songposition.getBarPosition() / copyOfM.defferedTo);
+                    int quantizeAfterPosition = (int)((double)(quantizeDiv + 1) * copyOfM.defferedTo) ;
                     copyOfM.defferedTo = ((double)quantizeAfterPosition - songposition.getBarPosition());
                 }
                 if (copyOfM.defferedEventType == RtMidiWrap::DEFFERED_EVENT_TYPE::AT_SPP){

@@ -14,7 +14,7 @@ bool WcMidiIn::msgToServer(const QString &msg){
 
 int WcMidiIn::getPortCount(){
 
-    return midiin->getPortCount();
+    return (int)midiin->getPortCount();
 };
 
 QString WcMidiIn::getPortName(int i){
@@ -27,7 +27,7 @@ int WcMidiIn::getPortNumber(const QString &s){
 
 QVariantMap WcMidiIn::getPorts(){
     QVariantMap qm;
-    int nPorts = midiin->getPortCount();
+    int nPorts = (int)midiin->getPortCount();
 
     for ( int i=0; i<nPorts; i++ ) {
         qm[QString::number(i)] = QString::fromStdString( midiin->getPortName(i));
@@ -39,7 +39,7 @@ QVariantMap WcMidiIn::getOpenedPorts(){
     QVariantMap qm;
 
     for(auto const& imap: openedMidiInObj){
-        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiin->openedPortName);
+        qm[QString::number(imap.first)] = QString::fromStdString(imap.second->midiin->getOpenedPortName());
     }
 
     return qm;

@@ -29,25 +29,31 @@ private:
     void proccessNrpn(RtMidiWrap::MidiEvent &m);
     void proccessChainsAndFilters(RtMidiWrap::MidiEvent &m);
 
+    std::vector<int> cc14Bit {};
+    std::unique_ptr<MidiFilterChain> routeFilterChains;
+    std::vector<std::unique_ptr<RtMidiWrap::MidiEvent>> defferedMidiEvents;
 public:
 
+    std::vector<std::unique_ptr<RtMidiWrap::MidiEvent>> &getDefferedMidiEvents(){
+        return defferedMidiEvents;
+    }
 
-    std::unique_ptr<MidiFilterChain> routeFilterChains;
-    std::vector<int> cc14Bit {};
-    std::vector<std::unique_ptr<RtMidiWrap::MidiEvent>> defferedMidiEvents;
-
+    std::unique_ptr<MidiFilterChain>  &getRouteFilterChains(){
+        return routeFilterChains;
+    }
     MidiInRouter(){
         routeFilterChains = std::unique_ptr<MidiFilterChain>(new MidiFilterChain());
     }
 
     void addCc14Bit(int channel,int cc){
-        cc14Bit.push_back(channel * 1000 + cc);
+        constexpr int bit14ModChannel = 1000;
+        cc14Bit.push_back(channel * bit14ModChannel + cc);
     }
 
     void clearCc14Bit(){
         cc14Bit.clear();
     }
-    void listener(RtMidiWrap::MidiEvent &m);
+    void listener(RtMidiWrap::MidiEvent &m) override;
 
 };
 

@@ -37,7 +37,7 @@ public:
     std::string commandStr;
     int data1 = 0;
     int data2 = 0;
-    MIDI_MSG_TYPE msgtype;
+    MIDI_MSG_TYPE msgtype = MIDI_MSG_TYPE::MIDI_CHANNEL_MESSAGES;
     int portNumber;
     std::string &portName;
 

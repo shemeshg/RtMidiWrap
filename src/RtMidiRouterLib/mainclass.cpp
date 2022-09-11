@@ -28,7 +28,7 @@ void MainClass::parseParams()
 {
 
     QSettings settings("shemeshg", "MidiRouter");
-    port = settings.value("server/port", 12345).toInt();
+    port = settings.value("server/port", 12345).toInt(); //NOLINT
     cout<<"Server port is "<<port<< "\n";
 
     QCommandLineParser parser;
@@ -69,19 +69,19 @@ void MainClass::connectAndExec(){
     }
 
     // wrap WebSocket clients in QWebChannelAbstractTransport objects
-    WebSocketClientWrapper *clientWrapper=new WebSocketClientWrapper(server);
+    WebSocketClientWrapper *clientWrapper=new WebSocketClientWrapper(server); //NOLINT
 
     // setup the channel
-    QWebChannel *channel=new QWebChannel();
+    QWebChannel *channel=new QWebChannel(); //NOLINT
     QObject::connect(clientWrapper, &WebSocketClientWrapper::clientConnected,
                      channel, &QWebChannel::connectTo);
 
     // setup the dialog and publish it to the QWebChannel
-    WcMidiOut* wcmidiout = new WcMidiOut(&app);
+    WcMidiOut* wcmidiout = new WcMidiOut(&app);//NOLINT
     channel->registerObject(QStringLiteral("wcmidiout"), wcmidiout);
-    WcMidiIn* wcmidiin = new WcMidiIn(&app);
+    WcMidiIn* wcmidiin = new WcMidiIn(&app);//NOLINT
     channel->registerObject(QStringLiteral("wcmidiin"), wcmidiin);
-    WcUserData* wcuserdata = new WcUserData(&app);
+    WcUserData* wcuserdata = new WcUserData(&app);//NOLINT
     channel->registerObject(QStringLiteral("wcuserdata"), wcuserdata);
     QObject::connect(wcuserdata, SIGNAL(applicationQuitSignal()), &app, SLOT(quit()));
 

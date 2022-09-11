@@ -1,12 +1,12 @@
 #include "common.h"
 namespace RtMidiWrap {
 
-std::vector<BYTE> CommonStatic::channelAll = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-CommonStatic::SiMap CommonStatic::_semitones ={
+const std::vector<BYTE> CommonStatic::channelAll = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+const CommonStatic::SiMap CommonStatic::_semitones ={
     {"C",0}, {"D",2}, {"E",4}, {"F",5}, {"G",7}, {"A",9}, {"B",11}
 };
 
-CommonStatic::MrpMap CommonStatic::midiRegisteredParameter = {
+const CommonStatic::MrpMap CommonStatic::midiRegisteredParameter = {
     {MIDI_REGISTERED_PARAMETER::pitchbendrange, {0x00, 0x00}},
     {MIDI_REGISTERED_PARAMETER::channelfinetuning, {0x00, 0x01}},
     {MIDI_REGISTERED_PARAMETER::channelcoarsetuning, {0x00, 0x02}},

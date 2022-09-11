@@ -1,6 +1,10 @@
 #pragma once
 #include <QApplication>
 
+namespace {
+    constexpr int defaultPort = 12345;
+}
+
 class MainClass
 {
 public:    
@@ -13,7 +17,7 @@ public:
         return serverIsRunning;
     }
 private:
-    int port = 12345;
+    int port = defaultPort;
     bool serverIsRunning = false;
     QApplication &app;
     void parseParams();

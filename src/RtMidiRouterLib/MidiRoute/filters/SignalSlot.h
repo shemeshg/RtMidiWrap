@@ -29,7 +29,8 @@ public:
 
                opendRemoteServersSockets->open(QUrl( connectionString ));
 
-               if (WaitForSignal(opendRemoteServersSockets.get(), &QWebSocket::connected, 100)){
+               constexpr int msecTimeout = 100;
+               if (WaitForSignal(opendRemoteServersSockets.get(), &QWebSocket::connected, msecTimeout)){
                    qDebug() << "connected.";
 
                    opendRemoteServers->initialize();
@@ -84,11 +85,8 @@ public:
             : QObject(Parent)
         {
 
-            connect(this, SIGNAL(invokeMethod(
-                QString  , int , QString , QString , QJsonArray
-                 )), &s, SLOT(invokeMethod(
-                QString  , int , QString , QString , QJsonArray
-                )));
+            connect(this, SIGNAL(invokeMethod(QString,int,QString,QString,QJsonArray)), &s,
+                    SLOT(invokeMethod(QString,int,QString,QString,QJsonArray)));
             qRegisterMetaType< std::vector<BYTE> >( "std::vector<BYTE>" );
             connect(this, SIGNAL(sendMessage(std::vector<BYTE>)), &s, SLOT(sendMessage(std::vector<BYTE>)));
             connect(this, SIGNAL(setNonRegisteredParameterInt(int,int,std::vector<BYTE>)), &s, SLOT(setNonRegisteredParameterInt(int,int,std::vector<BYTE>)));

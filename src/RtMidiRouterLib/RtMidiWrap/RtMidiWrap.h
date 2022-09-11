@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-#include "libs/rtmidi/RtMidi.h"
+#include "RtMidi.h"
 
 // Platform-dependent sleep routines.
 #if defined(WIN32)
@@ -9,7 +9,7 @@
     #define SLEEP( milliseconds ) std::this_thread::sleep_for(std::chrono::milliseconds((DWORD) milliseconds));
 #else // Unix variants
   #include <unistd.h>
-  #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+  //#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
 #endif
 
 
@@ -18,12 +18,17 @@ namespace RtMidiWrap {
 
 
 
+
 //MyClass.h
 class RtMidiWrapClass {
 public:
-      //static defs
-      typedef std::map<int, std::string> OpMap;
-      static OpMap apiMap;
+    static inline const  std::map<int, std::string>  apiMap = {
+    {RtMidi::MACOSX_CORE, "OS-X CoreMIDI" },
+    {RtMidi::WINDOWS_MM, "Windows MultiMedia"},
+    {RtMidi::UNIX_JACK, "Jack Client"},
+    {RtMidi::LINUX_ALSA, "Linux ALSA"},
+    {RtMidi::RTMIDI_DUMMY, "RtMidi Dummy"}
+      };
 };
 
 
@@ -41,22 +46,35 @@ public:
     bool isPortOpen	(void);
     void openVirtualPort	(const std::string & portName = std::string( "RtMidi Output" )	);
     void setErrorCallback	(RtMidiErrorCallback errorCallback = NULL, void * 	userData = 0 );
-    int openedPortNumber = -1;
-    std::string openedPortName = "";
+
+
+
+    std::string &getOpenedPortName(){
+         return openedPortName;
+    }
+    int &getOpenedPortNumber(){
+        return openedPortNumber;
+    }
 protected:
-    RtMidi  *p_midi=0;
+    void  setP_midi(RtMidi  *p){
+        p_midi=p;
+    };
 private:
+    std::string openedPortName = "";
+    int openedPortNumber = -1;
+    RtMidi  *p_midi=0;
     unsigned int unqIdPortNumber(unsigned int portNumber);
 };
 
 class MidiIn:public IMidiInOut{
-RtMidiIn  *p_midi_in=0;
+std::unique_ptr<RtMidiIn> p_midi_in;    
+
 public:
     //! User callback function type definition.
     typedef void (*RtMidiCallback)( double timeStamp, std::vector<unsigned char> *message, void *userData );
 
     MidiIn();
-    ~MidiIn(void);
+
     std::string getCurrentApi();
 
     void setCallback( RtMidiCallback callback, void *userData = 0 );
@@ -67,10 +85,10 @@ public:
 };
 
 class MidiOut:public IMidiInOut{
-    RtMidiOut  *p_midi_out=0;
+    std::unique_ptr<RtMidiOut> p_midi_out;
 public:
     MidiOut();
-    ~MidiOut(void);
+
     std::string getCurrentApi();
     void sendMessage(const std::vector< BYTE > *message);
     void sendMessage(const BYTE * 	message,size_t 	size);

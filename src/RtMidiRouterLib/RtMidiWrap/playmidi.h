@@ -29,7 +29,8 @@ public:
     }
 
     int getOctave(int number) {
-        return (number / 12 - 1) + octaveOffset;
+        constexpr int semiTonsPerOct = 12;
+        return (number / semiTonsPerOct - 1) + octaveOffset;
     }
 
     BYTE noteNameToNumber(std::string note);

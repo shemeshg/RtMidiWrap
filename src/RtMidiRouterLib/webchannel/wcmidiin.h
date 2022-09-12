@@ -90,7 +90,8 @@ public:
     }
 
     Q_INVOKABLE void restart(){
-        midiin.reset(new WcMidiInListener(*this));//NOLINT
+        midiin = std::make_unique<WcMidiInListener>(* dynamic_cast<Webchannel::EmitCommand*>(this));
+
         openedMidiInObj.clear();
         opendRemoteServers.clear();
         opendRemoteServersSockets.clear();

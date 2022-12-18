@@ -94,9 +94,9 @@ p.sendPitchBend(-1,{1});
 
 ## Built With
 
-- [Qt Create Open Source](https://www.qt.io/)
+- [Qt Create Open Source and QT6](https://www.qt.io/)
 
-- [Qt web channel](https://doc.qt.io/qt-6/qtwebchannel-index.html) (This is part of the Complete Qt install) 
+- [Qt web channel](https://doc.qt.io/qt-6/qtwebchannel-index.html) (This is part of the Complete open source Qt install) 
 
 - [RtMidi](https://www.music.mcgill.ca/~gary/rtmidi/) - C++ access to MIDI (Already part of the project files, no need to install) 
 

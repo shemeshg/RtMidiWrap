@@ -100,7 +100,7 @@ p.sendPitchBend(-1,{1});
 
 - [RtMidi](https://www.music.mcgill.ca/~gary/rtmidi/) - C++ access to MIDI (Already part of the project files, no need to install) 
 
-- https://github.com/P1eaz/QWebchannelCppClient/blob/master/main.cpp (Already part of the project files, no need to install, for server to server WebChannel)
+- https://github.com/P1eaz/QWebchannelCppClient/blob/master/main.cpp (Already part of the project files, no need to install, for server to server QtWebChannel)
 
 - Icon made by Pixel perfect from www.flaticon.com
 
